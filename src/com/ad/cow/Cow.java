@@ -41,11 +41,12 @@ public class Cow extends Activity {
 	    	editor.commit();
 	    	
 	    	mProgress.setProgress(newPercent);
-	    	if(newPercent > 50){
-	    		Toast.makeText(this, "Ваша корова сыта. Приходите когда она проголодается!",
-	                    Toast.LENGTH_LONG).show();
-	    		return;
-	    	}	
+    	}
+    	
+    	if(newPercent > 50){
+    		Toast.makeText(this, "Ваша корова сыта. Приходите когда она проголодается!",
+                    Toast.LENGTH_LONG).show();
+    		return;
     	}
     }
 }
