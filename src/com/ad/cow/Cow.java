@@ -35,15 +35,17 @@ public class Cow extends Activity {
     public void feed(View view) {
     	int newPercent = mProgress.getProgress()+10;
     	
-    	SharedPreferences.Editor editor = mySharedPreferences.edit();
-    	editor.putInt("percent",newPercent);
-    	editor.commit();
-    	
-    	mProgress.setProgress(newPercent);
-    	if(newPercent > 50){
-    		Toast.makeText(this, "Ваша корова сыта. Приходите когда она проголодается!",
-                    Toast.LENGTH_LONG).show();
-    		return;
+    	if(newPercent <= 100) {
+	    	SharedPreferences.Editor editor = mySharedPreferences.edit();
+	    	editor.putInt("percent",newPercent);
+	    	editor.commit();
+	    	
+	    	mProgress.setProgress(newPercent);
+	    	if(newPercent > 50){
+	    		Toast.makeText(this, "Ваша корова сыта. Приходите когда она проголодается!",
+	                    Toast.LENGTH_LONG).show();
+	    		return;
+	    	}	
     	}
     }
 }
