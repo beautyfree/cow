@@ -21,15 +21,16 @@ public class Cow extends Activity {
         setContentView(R.layout.main);
         
         loadPreferences();
-        
-        mProgress = (ProgressBar) findViewById(R.id.progressBar1);
-        mProgress.setProgress(percent);
     }
     
     private void loadPreferences() {
     	int mode = Activity.MODE_PRIVATE;
+    	
     	mySharedPreferences = getSharedPreferences(MY_PREFS,mode);
     	percent = mySharedPreferences.getInt("percent",0);
+    	
+    	mProgress = (ProgressBar) findViewById(R.id.progressBar1);
+        mProgress.setProgress(percent);
     }
     
     public void feed(View view) {
