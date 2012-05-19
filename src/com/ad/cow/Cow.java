@@ -21,10 +21,6 @@ public class Cow extends Activity {
         setContentView(R.layout.main);
         
         loadPreferences();
-        /*SharedPreferences.Editor editor = mySharedPreferences.edit();
-        
-        editor
-        */
         
         mProgress = (ProgressBar) findViewById(R.id.progressBar1);
         mProgress.setProgress(percent);
