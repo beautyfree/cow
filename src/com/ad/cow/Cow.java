@@ -63,7 +63,7 @@ public class Cow extends Activity {
 		countDownTimer.start();
 	}
 
-	public void feed(View view) {
+	public void onFeedClicked(View view) {
 		int newPercent = mProgress.getProgress() + 10;
 
 		if (newPercent <= 100) {
@@ -101,11 +101,6 @@ public class Cow extends Activity {
 		@Override
 		public void onTick(long millisUntilFinished) {
 			percent = (millisUntilFinished / 1000) * perSecond / percentByFood;
-
-			/*SharedPreferences.Editor editor = mySharedPreferences.edit();
-			editor.putFloat("percentf", percent);
-			editor.putLong("time", new Date().getTime());
-			editor.commit();*/
 
 			int newPercent = (int) Math.round(percent);
 			mProgress.setProgress(newPercent);
