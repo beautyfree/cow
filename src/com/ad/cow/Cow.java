@@ -110,10 +110,11 @@ public class Cow extends Activity {
 
 			mProgress.setProgress(newPercent);
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 			Date resultdate = new Date(millisUntilFinished);
 
-			textView.setText("Возвращайтесь скорее: " + sdf.format(resultdate));
+			long hours = millisUntilFinished / 1000 / 60 / 60;
+			textView.setText("Возвращайтесь скорее: " + hours + ":" + sdf.format(resultdate));
 		}
 	}
 }
