@@ -13,18 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Cow extends Activity {
+	private final String MY_PREFS = "MY_PREFS";
+	
 	private ProgressBar mProgress;
 	private TextView textView;
 	private SharedPreferences mySharedPreferences;
-	private static String MY_PREFS = "MY_PREFS";
 	private FeedCountDownTimer countDownTimer;
 
-	//private final double perMinute = 0.083;
-	private final double perSecond = 0.001383333;
-	private final double percentByFood = 1.2;
+	private final float perSecond = 0.001383333f;
+	private final float percentByFood = 1.2f;
 	private final long interval = 1000;
 
-	private int percent;
+	private float percent;
 	private long time;
 
 	/** Called when the activity is first created. */
@@ -37,24 +37,25 @@ public class Cow extends Activity {
 	}
 
 	private void loadPreferences() {
+		
 		int mode = Activity.MODE_PRIVATE;
 		long currentTime = new Date().getTime();
-
+		
 		mySharedPreferences = getSharedPreferences(MY_PREFS, mode);
-		percent = mySharedPreferences.getInt("percent", 0);
+		percent = mySharedPreferences.getFloat("percentf", 0.0f);
 		time = mySharedPreferences.getLong("time", currentTime);
 
 		long diff = currentTime - time;
-		double seconds = diff / 1000;
-		double eatenFood = seconds * perSecond;
+		float seconds = diff / 1000;
+		float eatenFood = seconds * perSecond;
 		
-		int cutPercent = (int) Math.round(eatenFood / percentByFood);
-		int newPercent = percent - cutPercent;
+		float cutPercent = eatenFood / percentByFood;
+		float newPercent = percent - cutPercent;
 
 		percent = Math.max(0, newPercent);
 
 		mProgress = (ProgressBar) findViewById(R.id.progressBar1);
-		mProgress.setProgress(percent);
+		mProgress.setProgress((int) percent);
 
 		textView = (TextView) findViewById(R.id.textView1);
 
@@ -68,7 +69,7 @@ public class Cow extends Activity {
 
 		if (newPercent <= 100) {
 			SharedPreferences.Editor editor = mySharedPreferences.edit();
-			editor.putInt("percent", newPercent);
+			editor.putFloat("percentf", (float) newPercent);
 			editor.putLong("time", new Date().getTime());
 			editor.commit();
 
@@ -99,10 +100,11 @@ public class Cow extends Activity {
 
 		@Override
 		public void onTick(long millisUntilFinished) {
-			int newPercent = (int) Math.round((millisUntilFinished / 1000) * perSecond / percentByFood);
+			float percentf = (millisUntilFinished / 1000) * perSecond / percentByFood;
+			int newPercent = (int) Math.round(percentf);
 	
 			SharedPreferences.Editor editor = mySharedPreferences.edit();
-			editor.putInt("percent", newPercent);
+			editor.putFloat("percentf", percentf);
 			editor.putLong("time", new Date().getTime());
 			editor.commit();
 
