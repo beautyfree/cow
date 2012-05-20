@@ -4,27 +4,25 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
-        android:layout_height="230dp"
+        android:layout_height="240dp"
         android:src="@drawable/cow" />
 
-	<TextView
+    <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Коровка сыта"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-    
+
     <ProgressBar
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <CheckedTextView
         android:id="@+id/checkedTextView3"
@@ -36,14 +34,7 @@
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Покормить" 
-        android:onClick="feed"/>
-
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Тут будет реклама, на маркете приложение будет стоить 1$ и смска на 4545 стоить будет 30$ :DD" />
+        android:onClick="feed"
+        android:text="Покормить" />
 
 </LinearLayout>
