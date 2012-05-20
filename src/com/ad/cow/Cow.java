@@ -19,7 +19,8 @@ public class Cow extends Activity {
 	private static String MY_PREFS = "MY_PREFS";
 	private FeedCountDownTimer countDownTimer;
 
-	private final double perMinute = 0.083;
+	//private final double perMinute = 0.083;
+	private final double perSecond = 0.001383333;
 	private final double percentByFood = 1.2;
 	private final long interval = 1000;
 
@@ -44,9 +45,9 @@ public class Cow extends Activity {
 		time = mySharedPreferences.getLong("time", currentTime);
 
 		long diff = currentTime - time;
-		double minutes = diff / 1000 / 60;
-
-		double eatenFood = minutes * perMinute;
+		double seconds = diff / 1000;
+		double eatenFood = seconds * perSecond;
+		
 		int cutPercent = (int) Math.round(eatenFood / percentByFood);
 		int newPercent = percent - cutPercent;
 
@@ -57,7 +58,7 @@ public class Cow extends Activity {
 
 		textView = (TextView) findViewById(R.id.textView1);
 
-		long timer = (long) ((percent * percentByFood) / perMinute) * 60 * 1000;
+		long timer = (long) ((percent * percentByFood) / perSecond) * 1000;
 		countDownTimer = new FeedCountDownTimer(timer, interval);
 		countDownTimer.start();
 	}
@@ -74,7 +75,7 @@ public class Cow extends Activity {
 			mProgress.setProgress(newPercent);
 
 			countDownTimer.cancel();
-			long timer = (long) ((newPercent * percentByFood) / perMinute) * 60 * 1000;
+			long timer = (long) ((newPercent * percentByFood) / perSecond) * 1000;
 			countDownTimer = new FeedCountDownTimer(timer, interval);
 			countDownTimer.start();
 		}
@@ -98,12 +99,19 @@ public class Cow extends Activity {
 
 		@Override
 		public void onTick(long millisUntilFinished) {
-			String text = "";
+			int newPercent = (int) Math.round((millisUntilFinished / 1000) * perSecond / percentByFood);
+	
+			SharedPreferences.Editor editor = mySharedPreferences.edit();
+			editor.putInt("percent", newPercent);
+			editor.putLong("time", new Date().getTime());
+			editor.commit();
+
+			mProgress.setProgress(newPercent);
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 			Date resultdate = new Date(millisUntilFinished);
-			text = sdf.format(resultdate);
 
-			textView.setText("Возвращайтесь скорее: " + text);
+			textView.setText("Возвращайтесь скорее: " + sdf.format(resultdate));
 		}
 	}
 }
