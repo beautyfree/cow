@@ -19,7 +19,8 @@ public class Cow extends Activity {
 	private TextView textView;
 	private SharedPreferences mySharedPreferences;
 	private FeedCountDownTimer countDownTimer;
-
+	private Toast toast;
+	
 	private final float perSecond = 0.001383333f;
 	private final float percentByFood = 1.2f;
 	private final long interval = 1000;
@@ -61,6 +62,11 @@ public class Cow extends Activity {
 		long timer = (long) ((percent * percentByFood) / perSecond) * 1000;
 		countDownTimer = new FeedCountDownTimer(timer, interval);
 		countDownTimer.start();
+		
+		toast = Toast.makeText(this,
+				"Ваша корова сыта. Приходите когда она проголодается!",
+				Toast.LENGTH_LONG
+		);
 	}
 
 	public void onFeedClicked(View view) {
@@ -86,10 +92,8 @@ public class Cow extends Activity {
 		countDownTimer.start();
 
 		if (newPercent > 50) {
-			Toast.makeText(this,
-					"Ваша корова сыта. Приходите когда она проголодается!",
-					Toast.LENGTH_LONG
-			).show();
+			toast.cancel();
+			toast.show();
 		}
 	}
 
