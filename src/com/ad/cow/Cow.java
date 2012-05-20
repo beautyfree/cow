@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class Cow extends Activity {
 	private final String MY_PREFS = "MY_PREFS";
-	
+
 	private ProgressBar mProgress;
 	private TextView textView;
 	private SharedPreferences mySharedPreferences;
@@ -37,10 +37,9 @@ public class Cow extends Activity {
 	}
 
 	private void loadPreferences() {
-		
 		int mode = Activity.MODE_PRIVATE;
 		long currentTime = new Date().getTime();
-		
+
 		mySharedPreferences = getSharedPreferences(MY_PREFS, mode);
 		percent = mySharedPreferences.getFloat("percentf", 0.0f);
 		time = mySharedPreferences.getLong("time", currentTime);
@@ -48,7 +47,7 @@ public class Cow extends Activity {
 		long diff = currentTime - time;
 		float seconds = diff / 1000;
 		float eatenFood = seconds * perSecond;
-		
+
 		float cutPercent = eatenFood / percentByFood;
 		float newPercent = percent - cutPercent;
 
@@ -68,15 +67,16 @@ public class Cow extends Activity {
 		int newPercent = mProgress.getProgress() + 10;
 
 		if (newPercent <= 100) {
+			percent += 10;
 			SharedPreferences.Editor editor = mySharedPreferences.edit();
-			editor.putFloat("percentf", (float) newPercent);
+			editor.putFloat("percentf", percent);
 			editor.putLong("time", new Date().getTime());
 			editor.commit();
 
 			mProgress.setProgress(newPercent);
 
 			countDownTimer.cancel();
-			long timer = (long) ((newPercent * percentByFood) / perSecond) * 1000;
+			long timer = (long) ((percent * percentByFood) / perSecond) * 1000;
 			countDownTimer = new FeedCountDownTimer(timer, interval);
 			countDownTimer.start();
 		}
@@ -100,21 +100,33 @@ public class Cow extends Activity {
 
 		@Override
 		public void onTick(long millisUntilFinished) {
-			float percentf = (millisUntilFinished / 1000) * perSecond / percentByFood;
-			int newPercent = (int) Math.round(percentf);
-	
-			SharedPreferences.Editor editor = mySharedPreferences.edit();
-			editor.putFloat("percentf", percentf);
-			editor.putLong("time", new Date().getTime());
-			editor.commit();
+			percent = (millisUntilFinished / 1000) * perSecond / percentByFood;
 
+			/*SharedPreferences.Editor editor = mySharedPreferences.edit();
+			editor.putFloat("percentf", percent);
+			editor.putLong("time", new Date().getTime());
+			editor.commit();*/
+
+			int newPercent = (int) Math.round(percent);
 			mProgress.setProgress(newPercent);
-			
+
 			SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 			Date resultdate = new Date(millisUntilFinished);
 
 			long hours = millisUntilFinished / 1000 / 60 / 60;
-			textView.setText("Возвращайтесь скорее: " + hours + ":" + sdf.format(resultdate));
+			textView.setText("Возвращайтесь скорее: " + hours + ":"
+					+ sdf.format(resultdate));
 		}
 	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+
+		SharedPreferences.Editor editor = mySharedPreferences.edit();
+		editor.putFloat("percentf", percent);
+		editor.putLong("time", new Date().getTime());
+		editor.commit();
+	}
+
 }
