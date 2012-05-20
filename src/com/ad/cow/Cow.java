@@ -68,23 +68,28 @@ public class Cow extends Activity {
 
 		if (newPercent <= 100) {
 			percent += 10;
-			SharedPreferences.Editor editor = mySharedPreferences.edit();
-			editor.putFloat("percentf", percent);
-			editor.putLong("time", new Date().getTime());
-			editor.commit();
-
-			mProgress.setProgress(newPercent);
-
-			countDownTimer.cancel();
-			long timer = (long) ((percent * percentByFood) / perSecond) * 1000;
-			countDownTimer = new FeedCountDownTimer(timer, interval);
-			countDownTimer.start();
+		} else {
+			newPercent = 100;
+			percent = 100;
 		}
+		
+		SharedPreferences.Editor editor = mySharedPreferences.edit();
+		editor.putFloat("percentf", percent);
+		editor.putLong("time", new Date().getTime());
+		editor.commit();
+
+		mProgress.setProgress(newPercent);
+
+		countDownTimer.cancel();
+		long timer = (long) ((percent * percentByFood) / perSecond) * 1000;
+		countDownTimer = new FeedCountDownTimer(timer, interval);
+		countDownTimer.start();
 
 		if (newPercent > 50) {
 			Toast.makeText(this,
 					"Ваша корова сыта. Приходите когда она проголодается!",
-					Toast.LENGTH_LONG).show();
+					Toast.LENGTH_LONG
+			).show();
 		}
 	}
 
