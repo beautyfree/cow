@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" 
-    android:background="#f5f3f3"
-    
-    >
+    android:background="#f5f3f3">
 
     <ImageView
         android:id="@+id/imageView1"
@@ -44,5 +43,4 @@
         android:layout_gravity="center"
         android:onClick="onFeedClicked"
         android:text="Покормить" />
-
 </LinearLayout>

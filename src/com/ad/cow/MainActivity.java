@@ -12,7 +12,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Cow extends Activity {
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+
+public class MainActivity extends SherlockActivity {
 	private final String MY_PREFS = "MY_PREFS";
 
 	private ProgressBar mProgress;
@@ -69,6 +73,26 @@ public class Cow extends Activity {
 		);
 	}
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("Save")
+            .setIcon(R.drawable.ic_compose)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        menu.add("Search")
+            .setIcon(R.drawable.ic_search)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        menu.add("Refresh")
+            .setIcon(R.drawable.ic_refresh)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        
+        //getSupportActionBar().setDisplayShowCustomEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        
+        return true;
+    }
+	
 	public void onFeedClicked(View view) {
 		int newPercent = mProgress.getProgress() + 10;
 
