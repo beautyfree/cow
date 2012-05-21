@@ -94,10 +94,10 @@ public class MainActivity extends SherlockActivity {
     }
 	
 	public void onFeedClicked(View view) {
-		int newPercent = mProgress.getProgress() + 10;
+		int newPercent = mProgress.getProgress() + 1;
 
 		if (newPercent <= 100) {
-			percent += 10;
+			percent += 0.01;
 		} else {
 			newPercent = 100;
 			percent = 100;
