@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -75,7 +76,8 @@ public class MainActivity extends SherlockActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("Save")
+    	
+        menu.add(Menu.NONE, R.id.ID_ACTION_EXIT, Menu.NONE, R.string.action_label_save)
             .setIcon(R.drawable.ic_compose)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
@@ -92,7 +94,22 @@ public class MainActivity extends SherlockActivity {
         
         return true;
     }
-	
+    
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.ID_ACTION_EXIT:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, TextActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    
 	public void onFeedClicked(View view) {
 		int newPercent = mProgress.getProgress() + 10;
 
