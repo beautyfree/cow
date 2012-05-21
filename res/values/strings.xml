@@ -6,5 +6,6 @@
     <string name="cowfeed">Your cow is fed. Come when it is hungry!</string>
     <string name="cowdie">The cow died :(</string>
 
-	<string name="action_label_save">Save</string>
+	<string name="action_label_home">Home</string>
+	<string name="action_label_status">Status</string>
 </resources>

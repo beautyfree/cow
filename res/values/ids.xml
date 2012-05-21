@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="ID_ACTION_EXIT" type="id"/>
+    <item name="ID_ACTION_HOME" type="id"/>
+    <item name="ID_ACTION_STATUS" type="id"/>
 </resources>
