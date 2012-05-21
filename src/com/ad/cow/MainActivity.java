@@ -68,7 +68,7 @@ public class MainActivity extends SherlockActivity {
 		countDownTimer.start();
 		
 		toast = Toast.makeText(this,
-				"Ваша корова сыта. Приходите когда она проголодается!",
+				R.string.cowfeed,
 				Toast.LENGTH_LONG
 		);
 	}
@@ -128,7 +128,7 @@ public class MainActivity extends SherlockActivity {
 
 		@Override
 		public void onFinish() {
-			textView.setText("Коровка умерла!");
+			textView.setText(R.string.cowdie);
 		}
 
 		@Override
@@ -142,7 +142,7 @@ public class MainActivity extends SherlockActivity {
 			Date resultdate = new Date(millisUntilFinished);
 
 			long hours = millisUntilFinished / 1000 / 60 / 60;
-			textView.setText("Возвращайтесь скорее: " + hours + ":"
+			textView.setText(getString(R.string.goback) + ": " + hours + ":"
 					+ sdf.format(resultdate));
 		}
 	}

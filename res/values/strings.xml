@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cow</string>
+    <string name="goback">Come back soon</string>
+    <string name="feed">Feed</string>
+    <string name="cowfeed">Your cow is fed. Come when it is hungry!</string>
+    <string name="cowdie">The cow died :(</string>
 </resources>
