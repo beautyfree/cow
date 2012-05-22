@@ -4,11 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -138,6 +138,10 @@ public class HomeActivity extends AbstractActivity {
 		
 		ImageView cow = (ImageView) findViewById(R.id.imageView1);
 		cow.setImageResource(R.drawable.cowdie);
+		
+
+		Button resurrect = (Button) findViewById(R.id.button1);
+		resurrect.setText(R.string.resurrect);
 	}
 	
 	@Override
