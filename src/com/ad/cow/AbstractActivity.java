@@ -3,6 +3,8 @@ package com.ad.cow;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -19,6 +21,13 @@ public class AbstractActivity extends SherlockActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(
+				WindowManager.LayoutParams.FLAG_FULLSCREEN
+				,WindowManager.LayoutParams.FLAG_FULLSCREEN
+		);
+		
 		// Create the adView
 		adView = new AdView(this, AdSize.BANNER, "a14fbaa462a5c66");
 	}
