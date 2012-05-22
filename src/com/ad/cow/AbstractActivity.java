@@ -1,33 +1,45 @@
 package com.ad.cow;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class AbstractActivity extends SherlockActivity {
 
-	/*private AdView adView;
-
+	private AdView adView;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-
 		// Create the adView
 		adView = new AdView(this, AdSize.BANNER, "a14fbaa462a5c66");
-
-		// Lookup your LinearLayout assuming it’s been given
+	}
+	
+    @Override
+    public void setContentView(int layoutResId) {
+  		// Lookup your LinearLayout assuming it’s been given
 		// the attribute android:id="@+id/mainLayout"
-		LinearLayout layout = (LinearLayout) findViewById(R.id.mainLayout);
-
+		LinearLayout layout = (LinearLayout) View.inflate(this, layoutResId, null);
+		
 		// Add the adView to it
 		layout.addView(adView);
+		
 
 		// Initiate a generic request to load it with an ad
-		adView.loadAd(new AdRequest());
-	}
+		adView.loadAd(new AdRequest()); 
+ 
+		
+		super.setContentView(layout);
+		adView.bringToFront();
+    }  
 
 	@Override
 	public void onDestroy() {
@@ -35,7 +47,7 @@ public class AbstractActivity extends SherlockActivity {
 			adView.destroy();
 		}
 		super.onDestroy();
-	}*/
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

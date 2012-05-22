@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" 
@@ -12,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="1" >
+        android:layout_weight="1">
 	
 	    <ImageView
 		    android:id="@+id/imageView1"
@@ -54,12 +53,4 @@
 	        android:onClick="onFeedClicked"
 	        android:text="@string/feed" />
 	</LinearLayout>
-    
-    <com.google.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/admob_publisher_id"
-        ads:loadAdOnCreate="true" />
 </LinearLayout>
