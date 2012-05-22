@@ -4,10 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,6 +74,10 @@ public class HomeActivity extends AbstractActivity {
 	}
     
 	public void onFeedClicked(View view) {
+		Intent intent = new Intent(this, AchieveActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+		
 		int newPercent = mProgress.getProgress() + 10;
 
 		if (newPercent <= 100) {
@@ -106,7 +112,9 @@ public class HomeActivity extends AbstractActivity {
 
 		@Override
 		public void onFinish() {
-			textView.setText(R.string.cowdie);
+			Die();
+			ImageView cow = (ImageView) findViewById(R.id.imageView1);
+			cow.setBackgroundResource(R.drawable.cowdie);
 		}
 
 		@Override
@@ -125,6 +133,10 @@ public class HomeActivity extends AbstractActivity {
 		}
 	}	
     
+	private void Die() {
+		textView.setText(R.string.cowdie);
+	}
+	
 	@Override
 	protected void onStop() {
 		super.onStop();
