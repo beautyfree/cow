@@ -5,4 +5,5 @@
     <string name="feed">Покормить</string>
     <string name="cowfeed">Ваша корова сыта. Приходите когда она проголодается!</string>
     <string name="cowdie">Коровка умерла :(</string>
-</resources>
+    <string name="cowfeed1">Коровка сыта</string>
+    </resources>
