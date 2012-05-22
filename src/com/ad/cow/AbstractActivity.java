@@ -1,15 +1,10 @@
 package com.ad.cow;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
 
 public class AbstractActivity extends SherlockActivity {
 

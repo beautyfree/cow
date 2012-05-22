@@ -11,5 +11,6 @@
 	
 	<string name="admob_publisher_id">a14fbaa462a5c66</string>
 	
-	    <string name="cowfeed1">Cow is fed</string>
+	<string name="cowfeed1">Cow is fed</string>
+	<string name="nothing"></string>
 </resources>

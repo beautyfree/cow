@@ -2,8 +2,6 @@ package com.ad.cow;
 
 import android.os.Bundle;
 
-import com.actionbarsherlock.app.SherlockActivity;
-
 public class StatusActivity extends AbstractActivity {
 
 	/** Called when the activity is first created. */
