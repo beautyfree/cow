@@ -44,10 +44,7 @@ public class HomeActivity extends AbstractActivity {
 		long currentTime = new Date().getTime();
 
 		mySharedPreferences = getSharedPreferences(MY_PREFS, mode);
-		percent = mySharedPreferences.getFloat("percentf", 0.0f);
-		if(percent == 0){
-			percent = 10;
-		}
+		percent = mySharedPreferences.getFloat("percentf", 10.0f);
 		time = mySharedPreferences.getLong("time", currentTime);
 
 		long diff = currentTime - time;
