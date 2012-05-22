@@ -19,7 +19,7 @@
 	    android:layout_height="240dp"
 	    android:layout_gravity="center"
     	android:src="@drawable/cow" 
-    	android:contentDescription="@string/feed"/>
+    	android:contentDescription="@string/nothing"/>
 	
 	    <TextView
 	        android:id="@+id/textView1"
