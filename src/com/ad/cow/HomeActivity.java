@@ -28,7 +28,8 @@ public class HomeActivity extends AbstractActivity {
 
 	private float percent;
 	private long time;
-
+	
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,9 @@ public class HomeActivity extends AbstractActivity {
 
 		mySharedPreferences = getSharedPreferences(MY_PREFS, mode);
 		percent = mySharedPreferences.getFloat("percentf", 0.0f);
+		if(percent == 0){
+			percent = 10;
+		}
 		time = mySharedPreferences.getLong("time", currentTime);
 
 		long diff = currentTime - time;
