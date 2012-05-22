@@ -113,8 +113,6 @@ public class HomeActivity extends AbstractActivity {
 		@Override
 		public void onFinish() {
 			Die();
-			ImageView cow = (ImageView) findViewById(R.id.imageView1);
-			cow.setBackgroundResource(R.drawable.cowdie);
 		}
 
 		@Override
@@ -135,6 +133,9 @@ public class HomeActivity extends AbstractActivity {
     
 	private void Die() {
 		textView.setText(R.string.cowdie);
+		
+		ImageView cow = (ImageView) findViewById(R.id.imageView1);
+		cow.setBackgroundResource(R.drawable.cowdie);
 	}
 	
 	@Override
