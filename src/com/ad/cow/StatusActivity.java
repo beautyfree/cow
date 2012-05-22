@@ -8,6 +8,6 @@ public class StatusActivity extends AbstractActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.text);
+		setContentView(R.layout.status);
 	}
 }

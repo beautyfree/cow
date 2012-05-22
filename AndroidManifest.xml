@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ad.cow"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" 
+    android:installLocation="preferExternal">
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -13,8 +14,7 @@
         android:label="@string/app_name" >
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/Theme.Sherlock"
-            android:uiOptions="splitActionBarWhenNarrow">
+            android:theme="@style/Theme.Sherlock">
             <intent-filter>
                 <action   android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,8 +23,7 @@
         
         <activity
             android:name=".StatusActivity"
-            android:theme="@style/Theme.Sherlock"
-            android:uiOptions="splitActionBarWhenNarrow">
+            android:theme="@style/Theme.Sherlock">
         </activity>
         
 		<activity android:name="com.google.ads.AdActivity"

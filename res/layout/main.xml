@@ -11,15 +11,16 @@
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_weight="1" >
 	
-    <ImageView
-	    android:id="@+id/imageView1"
-	    android:layout_width="wrap_content"
-	    android:layout_height="240dp"
-	    android:layout_gravity="center"
-    	android:src="@drawable/cow" 
-    	android:contentDescription="@string/nothing"/>
+	    <ImageView
+		    android:id="@+id/imageView1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="240dp"
+		    android:layout_gravity="center"
+	    	android:src="@drawable/cow" 
+	    	android:contentDescription="@string/nothing"/>
 	
 	    <TextView
 	        android:id="@+id/textView1"
