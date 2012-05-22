@@ -73,10 +73,12 @@ public class HomeActivity extends AbstractActivity {
 		);
 	}
     
-	public void onFeedClicked(View view) {
+	public void onFeedClicked(View view) {		
+		/*
 		Intent intent = new Intent(this, AchieveActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
+		*/
 		
 		int newPercent = mProgress.getProgress() + 10;
 
@@ -135,7 +137,7 @@ public class HomeActivity extends AbstractActivity {
 		textView.setText(R.string.cowdie);
 		
 		ImageView cow = (ImageView) findViewById(R.id.imageView1);
-		cow.setBackgroundResource(R.drawable.cowdie);
+		cow.setImageResource(R.drawable.cowdie);
 	}
 	
 	@Override
