@@ -7,6 +7,7 @@
     <string name="cowdie">The cow died :(</string>
 
 	<string name="action_label_home">Home</string>
+	<string name="action_label_experience">Experience</string>
 	<string name="action_label_status">Status</string>
 	
 	<string name="admob_publisher_id">a14fbaa462a5c66</string>
