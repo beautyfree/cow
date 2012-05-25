@@ -38,6 +38,7 @@ public class HomeActivity extends AbstractActivity {
 
 	private float percent;
 	private long time;
+	private float newExp;
 
 	/**
 	 * Старт активности
@@ -46,8 +47,9 @@ public class HomeActivity extends AbstractActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
 		loadPreferences();
+		
 	}
 
 	/**
@@ -151,10 +153,12 @@ public class HomeActivity extends AbstractActivity {
 		 * intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		 * startActivity(intent);
 		 */
+		
+		float exp = mySharedPreferences.getFloat("exp", 0.0f);
+		float newExp = exp + 20;
 
 		// Вычисляем новое значение процента голода
 		
-		ExperienceActivity.experienceInFood();
 		
 		
 		int newPercent = mProgress.getProgress() + 10;
@@ -235,6 +239,7 @@ public class HomeActivity extends AbstractActivity {
 
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
 		editor.putFloat("percentf", percent);
+		editor.putFloat("newExp", newExp);
 		editor.putLong("time", new Date().getTime());
 		editor.commit();
 	}

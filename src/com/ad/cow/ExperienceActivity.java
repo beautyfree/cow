@@ -13,14 +13,14 @@ public class ExperienceActivity extends AbstractActivity {
 	 * Необходимые переменные
 	 */
 	private final String MY_PREFS = "MY_PREFS";
-	private SharedPreferences mySharedPreferences;
+	private static SharedPreferences mySharedPreferences;
 	
 	private final float expPerSecond = 0.002777778f;
 	
-	private float exp;
+	private static float exp;
 	private long time;
-	private float newExp;
-	private static long expInFood = 0;
+	private static float newExp;
+	private static float expInFood = 0;
 	/**
 	 * Старт активности
 	 */
@@ -62,9 +62,7 @@ public class ExperienceActivity extends AbstractActivity {
 		progressView.setProgress((int)percent);
 	}
 
-	static void experienceInFood(){
-		expInFood = 20;
-	}
+
 	/**
 	 * При завершении экшена сохраняем данные
 	 */
