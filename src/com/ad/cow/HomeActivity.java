@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -152,6 +153,10 @@ public class HomeActivity extends AbstractActivity {
 		 */
 
 		// Вычисляем новое значение процента голода
+		
+		ExperienceActivity.experienceInFood();
+		
+		
 		int newPercent = mProgress.getProgress() + 10;
 
 		if (newPercent <= 100) {

@@ -20,6 +20,7 @@ public class ExperienceActivity extends AbstractActivity {
 	private float exp;
 	private long time;
 	private float newExp;
+	private static long expInFood = 0;
 	/**
 	 * Старт активности
 	 */
@@ -43,7 +44,9 @@ public class ExperienceActivity extends AbstractActivity {
 		long diff = currentTime - time; 
 		float seconds = diff / 1000;
 		float addExp = seconds * expPerSecond;
-		newExp = exp + addExp; 
+		newExp = exp + addExp + expInFood; 
+		
+		expInFood = 0;
 
 		TextView textView = (TextView) findViewById(R.id.textView1);
 		textView.setText("У вас " + newExp + " опыта");
@@ -59,6 +62,9 @@ public class ExperienceActivity extends AbstractActivity {
 		progressView.setProgress((int)percent);
 	}
 
+	static void experienceInFood(){
+		expInFood = 20;
+	}
 	/**
 	 * При завершении экшена сохраняем данные
 	 */
