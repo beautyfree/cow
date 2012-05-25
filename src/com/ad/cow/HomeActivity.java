@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -37,8 +36,7 @@ public class HomeActivity extends AbstractActivity {
 	private final long interval = 1000;
 
 	private float percent;
-	private long time;
-	private float newExp;
+	private long time;	
 
 	/**
 	 * Старт активности
@@ -155,7 +153,7 @@ public class HomeActivity extends AbstractActivity {
 		 */
 		
 		float exp = mySharedPreferences.getFloat("exp", 0.0f);
-		float newExp = exp + 20;
+		float newExp = exp + 15;
 
 		// Вычисляем новое значение процента голода
 		
@@ -175,6 +173,7 @@ public class HomeActivity extends AbstractActivity {
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
 		editor.putFloat("percentf", percent);
 		editor.putLong("time", new Date().getTime());
+		editor.putFloat("exp", newExp);
 		editor.commit();
 
 		// Останавливаем предыдущий таймер и стартуем с новыми данными
@@ -239,7 +238,6 @@ public class HomeActivity extends AbstractActivity {
 
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
 		editor.putFloat("percentf", percent);
-		editor.putFloat("newExp", newExp);
 		editor.putLong("time", new Date().getTime());
 		editor.commit();
 	}
