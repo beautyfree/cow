@@ -38,7 +38,7 @@ public class ExperienceActivity extends AbstractActivity {
 		// Достаем сохраненные данные
 		mySharedPreferences = getSharedPreferences(MY_PREFS,mode);
 		exp  = mySharedPreferences.getFloat("exp", 0.0f);
-		time = mySharedPreferences.getLong("time", currentTime);
+		time = mySharedPreferences.getLong("exp_time", currentTime);
 		
 		long diff = currentTime - time; 
 		float seconds = diff / 1000;
@@ -68,7 +68,7 @@ public class ExperienceActivity extends AbstractActivity {
 
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
 		editor.putFloat("exp", newExp);
-		editor.putLong("time", new Date().getTime());
+		editor.putLong("exp_time", new Date().getTime());
 		editor.commit();
 	}
 }
