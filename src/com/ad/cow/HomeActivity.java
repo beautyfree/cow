@@ -18,7 +18,6 @@ import android.widget.Toast;
  * Главная страница
  * 
  */
-
 public class HomeActivity extends AbstractActivity {
 	/**
 	 * Необходимые переменные
@@ -48,7 +47,6 @@ public class HomeActivity extends AbstractActivity {
 		setContentView(R.layout.main);
 		
 		loadPreferences();
-		
 	}
 	
 	/**
@@ -156,13 +154,10 @@ public class HomeActivity extends AbstractActivity {
 		 */
 
 		// Вычисляем новое значение процента голода и добавляем опыт
-		
-		
 		int newPercent = mProgress.getProgress() + 10;
 		if(newPercent < 100){
 			exp += 15;
-		}
-		
+		}	
 		
 		if (newPercent <= 100) {
 			percent += 10;
@@ -171,13 +166,6 @@ public class HomeActivity extends AbstractActivity {
 			percent = 100;
 		}
 		mProgress.setProgress(newPercent);
-
-		// Сохраняем измененные данные
-		/*SharedPreferences.Editor editor = mySharedPreferences.edit();
-		editor.putFloat("percentf", percent);
-		editor.putLong("time", new Date().getTime());
-		editor.putFloat("exp", exp);
-		editor.commit();*/
 
 		// Останавливаем предыдущий таймер и стартуем с новыми данными
 		countDownTimer.cancel();

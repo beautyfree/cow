@@ -54,27 +54,7 @@ public class ExperienceActivity extends AbstractActivity {
 		
 		TextView textView2 = (TextView) findViewById(R.id.textView2);
 		textView2.setText("Вам добавилось " + addExp+ " опыта");
-	
-
-		/*long currentLevel = 1;
-		double totalExp = 1.75 * Math.pow(currentLevel, 2) + 5.00 * currentLevel; // 0.0, 6.75, 17.0
-		double requiredExp = 3.5 * currentLevel + 6.7; // 6.7, 10.2
 		
-		double percentByExp = requiredExp / 100;
-		double currentExpForLevel = exp;
-		double currentPercent = currentExpForLevel / percentByExp;
-		
-		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
-		progressView.setProgress((int)currentPercent);*/
-		
-		/*Toast.makeText(this,
-				currentLevel+"\n"+
-				totalExp+"\n"+
-				requiredExp+"\n"+
-				percentByExp+"\n"+
-				currentExpForLevel+"\n"+
-				currentPercent
-		, Toast.LENGTH_LONG).show();*/
 		
 		handleLevelUp();
 		
@@ -83,14 +63,6 @@ public class ExperienceActivity extends AbstractActivity {
 		
 		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
 		progressView.setProgress((int)currentPercent);
-		
-		Toast.makeText(this,
-				level + "\n" +
-				percentByExp + "\n" +
-				currentPercent + "\n" +
-				nettoXpNeededForLevel(level) + "\n" +
-				xpSinceLastLevelUp() + "\n"
-		, Toast.LENGTH_LONG).show();
 	}
 
 	
