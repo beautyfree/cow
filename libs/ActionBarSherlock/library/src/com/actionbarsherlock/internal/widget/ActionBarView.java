@@ -17,6 +17,7 @@
 package com.actionbarsherlock.internal.widget;
 
 import org.xmlpull.v1.XmlPullParser;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;

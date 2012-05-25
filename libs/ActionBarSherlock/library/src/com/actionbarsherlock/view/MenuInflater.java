@@ -20,8 +20,11 @@ package com.actionbarsherlock.view;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.util.AttributeSet;
@@ -29,6 +32,7 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.InflateException;
 import android.view.View;
+
 import com.actionbarsherlock.internal.view.menu.MenuItemImpl;
 
 /**

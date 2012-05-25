@@ -10,12 +10,11 @@ import android.widget.TextView;
 
 public class ExperienceActivity extends AbstractActivity {
 
-	private final String MY_PREFS = "MY_PREFS";
 	private SharedPreferences mySharedPreferences;
 	private long time;
+	private long wasExp;
 	private long exp;
-
-	  /**
+	/**
 	 * Старт активности
 	 */
 	@Override
@@ -32,16 +31,23 @@ public class ExperienceActivity extends AbstractActivity {
 
 		// Достаем сохраненные данные
 		mySharedPreferences = getPreferences(mode);
-		exp  = mySharedPreferences.getLong("exp", 10);
+		wasExp  = mySharedPreferences.getLong("wasExp", 0);
 		time = mySharedPreferences.getLong("time", currentTime);
 		
 		long diff = currentTime - time; 
-		float hours = diff / 1000 / 60 / 60;
+		float hours = diff / 1000 / 60 / 60 ;
 		long expPerHour = (long) (hours * 10);
+		long exp = expPerHour + wasExp; 
 
 		TextView textView = (TextView) findViewById(R.id.textView1);
 		textView.setText("У вас " + exp + " опыта");
-
+		
+		TextView textView2 = (TextView) findViewById(R.id.textView2);
+		textView2.setText("У вас " + expPerHour+ " опыта в час");
+		
+		TextView textView3 = (TextView) findViewById(R.id.textView3);
+		textView3.setText("У вас " + wasExp + " было опыта");
+		
 		int percent = 60; 
 		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
 		progressView.setProgress((int)percent);
@@ -55,7 +61,7 @@ public class ExperienceActivity extends AbstractActivity {
 		super.onStop();
 
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
-		editor.putLong("exp", exp);
+		editor.putLong("wasExp", exp);
 		editor.putLong("time", new Date().getTime());
 		editor.commit();
 	}
