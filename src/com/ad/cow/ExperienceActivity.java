@@ -49,7 +49,7 @@ public class ExperienceActivity extends AbstractActivity {
 		textView2.setText("Вам добавилось " + addExp+ " опыта");
 		
 		TextView textView3 = (TextView) findViewById(R.id.textView3);
-		textView3.setText("У вас " + exp + " было опыта");
+		textView3.setText("У вас было " + exp + " опыта");
 		
 		int percent = 60; 
 		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
