@@ -84,6 +84,61 @@ public class HomeActivity extends AbstractActivity {
 			Die();
 		}
 	}
+	
+	/**
+	 * Метод жизни коровки
+	 */
+	private void Live() {
+		Alive();
+		
+		// Запускаем таймер голода коровки
+		long timer = (long) ((percent * percentByFood) / perSecond) * 1000;
+		countDownTimer = new FeedCountDownTimer(timer, interval);
+		countDownTimer.start();
+
+		// Создаем всплывающее сообщение для дальнейшего использования
+		// о том что коровка сыта
+		toast = Toast.makeText(this, R.string.cowfeed, Toast.LENGTH_LONG);
+	}
+	
+	/**
+	 * Метод оживления коровки
+	 */
+	private void Alive() {
+		// Изображение живой коровки
+		ImageView cow = (ImageView) findViewById(R.id.imageView1);
+		cow.setImageResource(R.drawable.cow);
+		
+		// Меняем название кнопки на Покормить
+		Button resurrect = (Button) findViewById(R.id.button1);
+		resurrect.setText(R.string.feed);
+		resurrect.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Feed();
+			}
+		});
+	}
+	
+	/**
+	 * Метод смерти коровки
+	 */
+	private void Die() {
+		// Надпись коровка погибла
+		textView.setText(R.string.cowdie);
+
+		// Изображение мертвой коровки
+		ImageView cow = (ImageView) findViewById(R.id.imageView1);
+		cow.setImageResource(R.drawable.cowdie);
+
+		// Меняем название кнопки на Воскресить
+		Button resurrect = (Button) findViewById(R.id.button1);
+		resurrect.setText(R.string.resurrect);
+		resurrect.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Alive();
+			}
+		});
+	}
 
 	/**
 	 * Метод выполняющийся при нажатии кнопки Покормить
@@ -128,62 +183,7 @@ public class HomeActivity extends AbstractActivity {
 			toast.show();
 		}
 	}
-
-	/**
-	 * Метод смерти коровки
-	 */
-	private void Die() {
-		// Надпись коровка погибла
-		textView.setText(R.string.cowdie);
-
-		// Изображение мертвой коровки
-		ImageView cow = (ImageView) findViewById(R.id.imageView1);
-		cow.setImageResource(R.drawable.cowdie);
-
-		// Меняем название кнопки на Воскресить
-		Button resurrect = (Button) findViewById(R.id.button1);
-		resurrect.setText(R.string.resurrect);
-		resurrect.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Alive();
-			}
-		});
-	}
-
-	/**
-	 * Метод оживления коровки
-	 */
-	private void Alive() {
-		// Изображение живой коровки
-		ImageView cow = (ImageView) findViewById(R.id.imageView1);
-		cow.setImageResource(R.drawable.cow);
-		
-		// Меняем название кнопки на Покормить
-		Button resurrect = (Button) findViewById(R.id.button1);
-		resurrect.setText(R.string.feed);
-		resurrect.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Feed();
-			}
-		});
-	}
 	
-	/**
-	 * Метод наступления жизни коровки
-	 */
-	private void Live() {
-		Alive();
-		
-		// Запускаем таймер голода коровки
-		long timer = (long) ((percent * percentByFood) / perSecond) * 1000;
-		countDownTimer = new FeedCountDownTimer(timer, interval);
-		countDownTimer.start();
-
-		// Создаем всплывающее сообщение для дальнейшего использования
-		// о том что коровка сыта
-		toast = Toast.makeText(this, R.string.cowfeed, Toast.LENGTH_LONG);
-	}
-
 	/**
 	 * Класс таймера обратного отсчета голода коровки
 	 * 
