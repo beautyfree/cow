@@ -46,7 +46,7 @@ public class ExperienceActivity extends AbstractActivity {
 		textView.setText("У вас " + newExp + " опыта");
 		
 		TextView textView2 = (TextView) findViewById(R.id.textView2);
-		textView2.setText("У вас " + addExp+ " опыта с последнего захода");
+		textView2.setText("Вам добавилось " + addExp+ " опыта");
 		
 		TextView textView3 = (TextView) findViewById(R.id.textView3);
 		textView3.setText("У вас " + exp + " было опыта");
