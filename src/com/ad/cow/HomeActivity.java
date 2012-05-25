@@ -135,7 +135,7 @@ public class HomeActivity extends AbstractActivity {
 		resurrect.setText(R.string.resurrect);
 		resurrect.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Alive();
+				Live();
 			}
 		});
 	}
