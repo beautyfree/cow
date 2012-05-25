@@ -53,13 +53,13 @@ public class HomeActivity extends AbstractActivity {
 	 * Загружаем настройки и проводим необходимые вычисления
 	 */
 	private void loadPreferences() {
-		int mode = Activity.MODE_PRIVATE;
+		int mode = Activity.MODE_MULTI_PROCESS;
 		long currentTime = new Date().getTime();
 
 		textView = (TextView) findViewById(R.id.textView1);
 
 		// Достаем сохраненные данные
-		mySharedPreferences = getPreferences(mode);
+		mySharedPreferences = getSharedPreferences(MY_PREFS,mode);
 		percent = mySharedPreferences.getFloat("percentf", 10.0f);
 		time = mySharedPreferences.getLong("time", currentTime);
 
@@ -142,8 +142,6 @@ public class HomeActivity extends AbstractActivity {
 
 	/**
 	 * Метод выполняющийся при нажатии кнопки Покормить
-	 * 
-	 * @param view
 	 */
 	public void Feed() {
 		/*

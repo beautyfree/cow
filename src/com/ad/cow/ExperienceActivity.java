@@ -9,7 +9,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class ExperienceActivity extends AbstractActivity {
-
+	/**
+	 * Необходимые переменные
+	 */
+	private final String MY_PREFS = "MY_PREFS";
 	private SharedPreferences mySharedPreferences;
 	
 	private final float expPerSecond = 0.002777778f;
@@ -29,11 +32,11 @@ public class ExperienceActivity extends AbstractActivity {
 	}
 
 	private void loadPreferences() {
-		int mode = Activity.MODE_PRIVATE;
+		int mode = Activity.MODE_MULTI_PROCESS;
 		long currentTime = new Date().getTime();
 
 		// Достаем сохраненные данные
-		mySharedPreferences = getPreferences(mode);
+		mySharedPreferences = getSharedPreferences(MY_PREFS,mode);
 		exp  = mySharedPreferences.getFloat("exp", 0.0f);
 		time = mySharedPreferences.getLong("time", currentTime);
 		
