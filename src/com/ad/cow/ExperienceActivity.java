@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ExperienceActivity extends AbstractActivity {
 	/**
@@ -19,7 +20,9 @@ public class ExperienceActivity extends AbstractActivity {
 	
 	private float exp;
 	private long time;
+	private int level;
 	private float newExp;
+    
 	/**
 	 * Старт активности
 	 */
@@ -37,9 +40,10 @@ public class ExperienceActivity extends AbstractActivity {
 
 		// Достаем сохраненные данные
 		mySharedPreferences = getSharedPreferences(MY_PREFS,mode);
-		exp  = mySharedPreferences.getFloat("exp", 0.0f);
 		time = mySharedPreferences.getLong("exp_time", currentTime);
-		
+		level = mySharedPreferences.getInt("level", 0);
+		exp = mySharedPreferences.getFloat("exp", 0.0f);
+
 		long diff = currentTime - time; 
 		float seconds = diff / 1000;
 		float addExp = seconds * expPerSecond;
@@ -53,12 +57,84 @@ public class ExperienceActivity extends AbstractActivity {
 		
 		TextView textView3 = (TextView) findViewById(R.id.textView3);
 		textView3.setText("У вас было " + exp + " опыта");
+	
+
+		/*long currentLevel = 1;
+		double totalExp = 1.75 * Math.pow(currentLevel, 2) + 5.00 * currentLevel; // 0.0, 6.75, 17.0
+		double requiredExp = 3.5 * currentLevel + 6.7; // 6.7, 10.2
 		
-		int percent = 60; 
+		double percentByExp = requiredExp / 100;
+		double currentExpForLevel = exp;
+		double currentPercent = currentExpForLevel / percentByExp;
+		
 		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
-		progressView.setProgress((int)percent);
+		progressView.setProgress((int)currentPercent);*/
+		
+		/*Toast.makeText(this,
+				currentLevel+"\n"+
+				totalExp+"\n"+
+				requiredExp+"\n"+
+				percentByExp+"\n"+
+				currentExpForLevel+"\n"+
+				currentPercent
+		, Toast.LENGTH_LONG).show();*/
+		
+		handleLevelUp();
+		
+		double percentByExp = nettoXpNeededForLevel(level+1) / 100;
+		double currentPercent = xpSinceLastLevelUp() / percentByExp;
+		
+		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
+		progressView.setProgress((int)currentPercent);
+		
+		Toast.makeText(this,
+				level + "\n" +
+				percentByExp + "\n" +
+				currentPercent + "\n" +
+				nettoXpNeededForLevel(level) + "\n" +
+				xpSinceLastLevelUp() + "\n"
+		, Toast.LENGTH_LONG).show();
 	}
 
+	
+    /**
+	* Check if the player has reached enough XP for a levelup
+	*/
+    private void handleLevelUp() {
+        if (xpSinceLastLevelUp() >= nettoXpNeededForLevel(level+1)) {
+            level++; 
+        }
+    }
+
+    /**
+	*
+	* @param level to calculate summed up xp value for
+	*
+	* @return summed up xp value
+	*/
+    public double summedUpXpNeededForLevel(int level){
+    	return 1.75 * Math.pow(level, 2) + 5.00 * level;
+    }
+    
+    /**
+	*
+	* @param level to calculate netto xp value for
+	*
+	* @return netto xp value
+	*/
+    public double nettoXpNeededForLevel(int level){
+        if (level == 0) return 0;
+        return summedUpXpNeededForLevel(level) - summedUpXpNeededForLevel(level-1);
+    }
+    
+    /**
+	*
+	* @return xp gained since last level up
+	*/
+    public double xpSinceLastLevelUp(){
+        return exp - summedUpXpNeededForLevel(level);
+    }
+	
 	/**
 	 * При завершении экшена сохраняем данные
 	 */
@@ -67,8 +143,9 @@ public class ExperienceActivity extends AbstractActivity {
 		super.onStop();
 
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
-		editor.putFloat("exp", newExp);
 		editor.putLong("exp_time", new Date().getTime());
+		editor.putInt("level", level);
+		editor.putFloat("exp", newExp);
 		editor.commit();
 	}
 }
