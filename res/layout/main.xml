@@ -17,8 +17,7 @@
 		    android:id="@+id/imageView1"
 		    android:layout_width="wrap_content"
 		    android:layout_height="240dp"
-		    android:layout_gravity="center"
-	    	android:src="@drawable/cow" 
+		    android:layout_gravity="center" 
 	    	android:contentDescription="@string/nothing"/>
 	
 	    <TextView
@@ -49,8 +48,6 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:padding="10dp"
-	        android:layout_gravity="center"
-	        android:onClick="onFeedClicked"
-	        android:text="@string/feed" />
+	        android:layout_gravity="center"/>
 	</LinearLayout>
 </LinearLayout>
