@@ -11,9 +11,12 @@ import android.widget.TextView;
 public class ExperienceActivity extends AbstractActivity {
 
 	private SharedPreferences mySharedPreferences;
+	
+	private final float expPerSecond = 0.002777778f;
+	
+	private float exp;
 	private long time;
 	private float newExp;
-	private float exp;
 	/**
 	 * Старт активности
 	 */
@@ -35,15 +38,15 @@ public class ExperienceActivity extends AbstractActivity {
 		time = mySharedPreferences.getLong("time", currentTime);
 		
 		long diff = currentTime - time; 
-		float hours = diff / 1000 / 60 / 60 ;
-		float expPerHour = hours * 10;
-		newExp = expPerHour + exp; 
+		float seconds = diff / 1000;
+		float addExp = seconds * expPerSecond;
+		newExp = exp + addExp; 
 
 		TextView textView = (TextView) findViewById(R.id.textView1);
 		textView.setText("У вас " + newExp + " опыта");
 		
 		TextView textView2 = (TextView) findViewById(R.id.textView2);
-		textView2.setText("У вас " + expPerHour+ " опыта в час");
+		textView2.setText("У вас " + addExp+ " опыта в час");
 		
 		TextView textView3 = (TextView) findViewById(R.id.textView3);
 		textView3.setText("У вас " + exp + " было опыта");
