@@ -47,16 +47,13 @@ public class ExperienceActivity extends AbstractActivity {
 		long diff = currentTime - time; 
 		float seconds = diff / 1000;
 		float addExp = seconds * expPerSecond;
-		newExp = exp + addExp; 
+		exp = exp + addExp; 
 
 		TextView textView = (TextView) findViewById(R.id.textView1);
-		textView.setText("У вас " + newExp + " опыта");
+		textView.setText("У вас " + exp + " опыта");
 		
 		TextView textView2 = (TextView) findViewById(R.id.textView2);
 		textView2.setText("Вам добавилось " + addExp+ " опыта");
-		
-		TextView textView3 = (TextView) findViewById(R.id.textView3);
-		textView3.setText("У вас было " + exp + " опыта");
 	
 
 		/*long currentLevel = 1;
@@ -145,7 +142,7 @@ public class ExperienceActivity extends AbstractActivity {
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
 		editor.putLong("exp_time", new Date().getTime());
 		editor.putInt("level", level);
-		editor.putFloat("exp", newExp);
+		editor.putFloat("exp", exp);
 		editor.commit();
 	}
 }

@@ -37,6 +37,7 @@ public class HomeActivity extends AbstractActivity {
 
 	private float percent;
 	private long time;
+	private float exp;
 	
 	/**
 	 * Старт активности
@@ -63,6 +64,7 @@ public class HomeActivity extends AbstractActivity {
 		mySharedPreferences = getSharedPreferences(MY_PREFS,mode);
 		percent = mySharedPreferences.getFloat("percentf", 10.0f);
 		time = mySharedPreferences.getLong("time", currentTime);
+		exp = mySharedPreferences.getFloat("exp", 0.0f);
 
 		// Проводим вычисления процента
 		long diff = currentTime - time;
@@ -157,14 +159,8 @@ public class HomeActivity extends AbstractActivity {
 		
 		
 		int newPercent = mProgress.getProgress() + 10;
-		
-		float exp = mySharedPreferences.getFloat("exp", 0.0f);
-		float newExp;
 		if(newPercent < 100){
-			newExp = exp + 15;
-		}
-		else{
-			newExp = exp;
+			exp += 15;
 		}
 		
 		
@@ -177,11 +173,11 @@ public class HomeActivity extends AbstractActivity {
 		mProgress.setProgress(newPercent);
 
 		// Сохраняем измененные данные
-		SharedPreferences.Editor editor = mySharedPreferences.edit();
+		/*SharedPreferences.Editor editor = mySharedPreferences.edit();
 		editor.putFloat("percentf", percent);
 		editor.putLong("time", new Date().getTime());
-		editor.putFloat("exp", newExp);
-		editor.commit();
+		editor.putFloat("exp", exp);
+		editor.commit();*/
 
 		// Останавливаем предыдущий таймер и стартуем с новыми данными
 		countDownTimer.cancel();
@@ -246,6 +242,7 @@ public class HomeActivity extends AbstractActivity {
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
 		editor.putFloat("percentf", percent);
 		editor.putLong("time", new Date().getTime());
+		editor.putFloat("exp", exp);
 		editor.commit();
 	}
 
