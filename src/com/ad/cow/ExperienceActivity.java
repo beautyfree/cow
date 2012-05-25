@@ -13,7 +13,7 @@ public class ExperienceActivity extends AbstractActivity {
 
 	private long time;
 	private final String MY_PREFS = "MY_PREFS";
-	private int exp;
+	private long exp = 100;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,20 +32,20 @@ public class ExperienceActivity extends AbstractActivity {
 		time = mySharedPreferences.getLong("time", currentTime);
 		
 		long diff = currentTime - time;
-		float hours = diff / 3600000;
+		float hours = diff / 360;
 		long expPerHour = (long) (hours * 10);
+		long exp = mySharedPreferences.getLong("exp", 10);
 
 		TextView textView = (TextView) findViewById(R.id.textView1);
-		textView.setText("У вас " + hours + " опыта");
+		textView.setText("У вас " + exp + " опыта");
 		
 		int percent = 60;
 		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
 		progressView.setProgress((int)percent);
 		
-		
-		//сохраняем данные
+
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
-	    editor.putFloat("exp", exp);
+	    editor.putLong("exp", exp);
 	    editor.putLong("time", new Date().getTime());
 	    editor.commit();
 	}
