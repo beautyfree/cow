@@ -77,6 +77,7 @@ public class HomeActivity extends AbstractActivity {
 		mProgress = (ProgressBar) findViewById(R.id.progressBar1);
 		mProgress.setProgress((int) percent);
 
+		// Если сыта - живет, иначе смерть
 		if(percent > 0) {
 			Live();
 		} else {
@@ -129,7 +130,7 @@ public class HomeActivity extends AbstractActivity {
 	}
 
 	/**
-	 * Метод наступления смерти коровки
+	 * Метод смерти коровки
 	 */
 	private void Die() {
 		// Надпись коровка погибла
@@ -150,7 +151,7 @@ public class HomeActivity extends AbstractActivity {
 	}
 
 	/**
-	 * Метод наступления оживления коровки
+	 * Метод оживления коровки
 	 */
 	private void Alive() {
 		// Изображение живой коровки
