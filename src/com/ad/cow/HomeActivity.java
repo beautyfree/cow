@@ -37,7 +37,7 @@ public class HomeActivity extends AbstractActivity {
 
 	private float percent;
 	private long time;
-
+	
 	/**
 	 * Старт активности
 	 */
@@ -45,10 +45,11 @@ public class HomeActivity extends AbstractActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
 		loadPreferences();
+		
 	}
-
+	
 	/**
 	 * Загружаем настройки и проводим необходимые вычисления
 	 */
@@ -70,6 +71,7 @@ public class HomeActivity extends AbstractActivity {
 
 		float cutPercent = eatenFood / percentByFood;
 		float newPercent = percent - cutPercent;
+		
 
 		percent = Math.max(0, newPercent);
 
@@ -139,7 +141,7 @@ public class HomeActivity extends AbstractActivity {
 			}
 		});
 	}
-
+	
 	/**
 	 * Метод выполняющийся при нажатии кнопки Покормить
 	 */
@@ -151,9 +153,21 @@ public class HomeActivity extends AbstractActivity {
 		 * startActivity(intent);
 		 */
 
-		// Вычисляем новое значение процента голода
+		// Вычисляем новое значение процента голода и добавляем опыт
+		
+		
 		int newPercent = mProgress.getProgress() + 10;
-
+		
+		float exp = mySharedPreferences.getFloat("exp", 0.0f);
+		float newExp;
+		if(newPercent < 100){
+			newExp = exp + 15;
+		}
+		else{
+			newExp = exp;
+		}
+		
+		
 		if (newPercent <= 100) {
 			percent += 10;
 		} else {
@@ -166,6 +180,7 @@ public class HomeActivity extends AbstractActivity {
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
 		editor.putFloat("percentf", percent);
 		editor.putLong("time", new Date().getTime());
+		editor.putFloat("exp", newExp);
 		editor.commit();
 
 		// Останавливаем предыдущий таймер и стартуем с новыми данными
