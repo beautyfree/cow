@@ -129,45 +129,6 @@ public class HomeActivity extends AbstractActivity {
 	}
 
 	/**
-	 * Класс таймера обратного отсчета голода коровки
-	 * 
-	 */
-	private class FeedCountDownTimer extends CountDownTimer {
-		public FeedCountDownTimer(long startTime, long interval) {
-			super(startTime, interval);
-		}
-
-		/**
-		 * При истечении времени коровка погибает
-		 */
-		@Override
-		public void onFinish() {
-			Die();
-		}
-
-		/**
-		 * Выполняет при каждом наступлении интервала
-		 */
-		@Override
-		public void onTick(long millisUntilFinished) {
-			percent = (millisUntilFinished / 1000) * perSecond / percentByFood;
-
-			// Устанавливаем новый процент голода коровки
-			int newPercent = (int) Math.round(percent);
-			mProgress.setProgress(newPercent);
-
-			// Задаем формат для оставшегося времени
-			SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-			Date resultdate = new Date(millisUntilFinished);
-
-			// Узнаем общшее количество оставшихся часов
-			long hours = millisUntilFinished / 1000 / 60 / 60;
-			textView.setText(getString(R.string.goback) + ": " + hours + ":"
-					+ sdf.format(resultdate));
-		}
-	}
-
-	/**
 	 * Метод наступления смерти коровки
 	 */
 	private void Die() {
@@ -222,6 +183,45 @@ public class HomeActivity extends AbstractActivity {
 		toast = Toast.makeText(this, R.string.cowfeed, Toast.LENGTH_LONG);
 	}
 
+	/**
+	 * Класс таймера обратного отсчета голода коровки
+	 * 
+	 */
+	private class FeedCountDownTimer extends CountDownTimer {
+		public FeedCountDownTimer(long startTime, long interval) {
+			super(startTime, interval);
+		}
+
+		/**
+		 * При истечении времени коровка погибает
+		 */
+		@Override
+		public void onFinish() {
+			Die();
+		}
+
+		/**
+		 * Выполняет при каждом наступлении интервала
+		 */
+		@Override
+		public void onTick(long millisUntilFinished) {
+			percent = (millisUntilFinished / 1000) * perSecond / percentByFood;
+
+			// Устанавливаем новый процент голода коровки
+			int newPercent = (int) Math.round(percent);
+			mProgress.setProgress(newPercent);
+
+			// Задаем формат для оставшегося времени
+			SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+			Date resultdate = new Date(millisUntilFinished);
+
+			// Узнаем общшее количество оставшихся часов
+			long hours = millisUntilFinished / 1000 / 60 / 60;
+			textView.setText(getString(R.string.goback) + ": " + hours + ":"
+					+ sdf.format(resultdate));
+		}
+	}
+	
 	/**
 	 * При завершении экшена сохраняем данные
 	 */
