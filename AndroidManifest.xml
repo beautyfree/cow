@@ -34,7 +34,7 @@
             android:screenOrientation="portrait">
         </activity>
         
-         <activity
+        <activity
             android:name=".ExperienceActivity"
             android:theme="@style/Theme.Sherlock"
             android:screenOrientation="portrait">

@@ -59,7 +59,7 @@ public class HomeActivity extends AbstractActivity {
     textView = (TextView) findViewById(R.id.textView1);
 
     // Достаем сохраненные данные
-    mySharedPreferences = getSharedPreferences(MY_PREFS, mode);
+    mySharedPreferences = getPreferences(mode);
     percent = mySharedPreferences.getFloat("percentf", 10.0f);
     time = mySharedPreferences.getLong("time", currentTime);
 
