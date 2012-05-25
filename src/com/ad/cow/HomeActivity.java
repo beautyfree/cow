@@ -36,8 +36,8 @@ public class HomeActivity extends AbstractActivity {
 	private final long interval = 1000;
 
 	private float percent;
-	private long time;	
-
+	private long time;
+	
 	/**
 	 * Старт активности
 	 */
@@ -49,7 +49,7 @@ public class HomeActivity extends AbstractActivity {
 		loadPreferences();
 		
 	}
-
+	
 	/**
 	 * Загружаем настройки и проводим необходимые вычисления
 	 */
@@ -71,6 +71,7 @@ public class HomeActivity extends AbstractActivity {
 
 		float cutPercent = eatenFood / percentByFood;
 		float newPercent = percent - cutPercent;
+		
 
 		percent = Math.max(0, newPercent);
 
@@ -140,7 +141,7 @@ public class HomeActivity extends AbstractActivity {
 			}
 		});
 	}
-
+	
 	/**
 	 * Метод выполняющийся при нажатии кнопки Покормить
 	 */
@@ -151,16 +152,22 @@ public class HomeActivity extends AbstractActivity {
 		 * intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		 * startActivity(intent);
 		 */
-		
-		float exp = mySharedPreferences.getFloat("exp", 0.0f);
-		float newExp = exp + 15;
 
-		// Вычисляем новое значение процента голода
-		
+		// Вычисляем новое значение процента голода и добавляем опыт
 		
 		
 		int newPercent = mProgress.getProgress() + 10;
-
+		
+		float exp = mySharedPreferences.getFloat("exp", 0.0f);
+		float newExp;
+		if(newPercent < 100){
+			newExp = exp + 15;
+		}
+		else{
+			newExp = exp;
+		}
+		
+		
 		if (newPercent <= 100) {
 			percent += 10;
 		} else {
