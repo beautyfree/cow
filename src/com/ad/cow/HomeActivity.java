@@ -22,11 +22,9 @@ public class HomeActivity extends AbstractActivity {
 	/**
 	 * Необходимые переменные
 	 */
-	private final String MY_PREFS = "MY_PREFS";
-
+	private GlobalVar gv;
 	private ProgressBar mProgress;
 	private TextView textView;
-	private SharedPreferences mySharedPreferences;
 	private FeedCountDownTimer countDownTimer;
 	private Toast toast;
 
@@ -45,7 +43,7 @@ public class HomeActivity extends AbstractActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		loadPreferences();
 	}
 	
@@ -53,16 +51,15 @@ public class HomeActivity extends AbstractActivity {
 	 * Загружаем настройки и проводим необходимые вычисления
 	 */
 	private void loadPreferences() {
-		int mode = Activity.MODE_MULTI_PROCESS;
 		long currentTime = new Date().getTime();
 
 		textView = (TextView) findViewById(R.id.textView1);
 
 		// Достаем сохраненные данные
-		mySharedPreferences = getSharedPreferences(MY_PREFS,mode);
-		percent = mySharedPreferences.getFloat("percentf", 10.0f);
-		time = mySharedPreferences.getLong("time", currentTime);
-		exp = mySharedPreferences.getFloat("exp", 0.0f);
+		gv = GlobalVar.getInstance();
+		percent = gv.getPercent();
+		time = gv.getTime();
+		exp = gv.getExp();
 
 		// Проводим вычисления процента
 		long diff = currentTime - time;
@@ -90,7 +87,7 @@ public class HomeActivity extends AbstractActivity {
 	/**
 	 * Метод жизни коровки
 	 */
-	private void Live() {
+	public void Live() {
 		Alive();
 		
 		// Запускаем таймер голода коровки
@@ -106,7 +103,7 @@ public class HomeActivity extends AbstractActivity {
 	/**
 	 * Метод оживления коровки
 	 */
-	private void Alive() {
+	public void Alive() {
 		// Изображение живой коровки
 		ImageView cow = (ImageView) findViewById(R.id.imageView1);
 		cow.setImageResource(R.drawable.cow);
@@ -124,7 +121,7 @@ public class HomeActivity extends AbstractActivity {
 	/**
 	 * Метод смерти коровки
 	 */
-	private void Die() {
+	public void Die() {
 		// Надпись коровка погибла
 		textView.setText(R.string.cowdie);
 
@@ -224,14 +221,13 @@ public class HomeActivity extends AbstractActivity {
 	 * При завершении экшена сохраняем данные
 	 */
 	@Override
-	protected void onStop() {
+	protected void onStop() {		
+		gv.setPercent(percent);
+		gv.setTime(new Date().getTime());
+		gv.setExp(exp);
+		gv.save();
+		
 		super.onStop();
-
-		SharedPreferences.Editor editor = mySharedPreferences.edit();
-		editor.putFloat("percentf", percent);
-		editor.putLong("time", new Date().getTime());
-		editor.putFloat("exp", exp);
-		editor.commit();
 	}
 
 }

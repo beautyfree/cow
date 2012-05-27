@@ -12,10 +12,8 @@ import android.widget.Toast;
 public class ExperienceActivity extends AbstractActivity {
 	/**
 	 * Необходимые переменные
-	 */
-	private final String MY_PREFS = "MY_PREFS";
-	private SharedPreferences mySharedPreferences;
-	
+	 */	
+	private GlobalVar gv;
 	private final float expPerSecond = 0.002777778f;
 	
 	private float exp;
@@ -35,14 +33,13 @@ public class ExperienceActivity extends AbstractActivity {
 	}
 
 	private void loadPreferences() {
-		int mode = Activity.MODE_MULTI_PROCESS;
 		long currentTime = new Date().getTime();
 
 		// Достаем сохраненные данные
-		mySharedPreferences = getSharedPreferences(MY_PREFS,mode);
-		time = mySharedPreferences.getLong("exp_time", currentTime);
-		level = mySharedPreferences.getInt("level", 0);
-		exp = mySharedPreferences.getFloat("exp", 0.0f);
+		gv = GlobalVar.getInstance();
+		time = gv.getExpTime();
+		level = gv.getLevel();
+		exp = gv.getExp();
 
 		long diff = currentTime - time; 
 		float seconds = diff / 1000;
@@ -109,12 +106,11 @@ public class ExperienceActivity extends AbstractActivity {
 	 */
 	@Override
 	protected void onStop() {
+		gv.setExpTime(new Date().getTime());
+		gv.setLevel(level);
+		gv.setExp(exp);
+		gv.save();
+		
 		super.onStop();
-
-		SharedPreferences.Editor editor = mySharedPreferences.edit();
-		editor.putLong("exp_time", new Date().getTime());
-		editor.putInt("level", level);
-		editor.putFloat("exp", exp);
-		editor.commit();
 	}
 }
