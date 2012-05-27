@@ -5,6 +5,7 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,10 +29,42 @@ public class ExperienceActivity extends AbstractActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.experience);
-
-		loadPreferences();
+		
+		Log.d("init", "onCreate");
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		Log.d("init", "onStart");
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		Log.d("init", "onResume");
+		
+		loadPreferences();
+	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		Log.d("init", "onStop");
+	}
+	
+	@Override
+	public void onRestart() {
+		super.onRestart();
+		Log.d("init", "onRestart");
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		Log.d("init", "onDestroy");
+	}
+	
 	private void loadPreferences() {
 		long currentTime = new Date().getTime();
 
@@ -60,6 +93,11 @@ public class ExperienceActivity extends AbstractActivity {
 		
 		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
 		progressView.setProgress((int)currentPercent);
+		
+		/*gv.setExpTime(new Date().getTime());
+		gv.setLevel(level);
+		gv.setExp(exp);
+		gv.save();*/
 	}
 
 	
@@ -99,18 +137,20 @@ public class ExperienceActivity extends AbstractActivity {
 	*/
     public double xpSinceLastLevelUp(){
         return exp - summedUpXpNeededForLevel(level);
-    }
-	
+    }  
+    
 	/**
 	 * При завершении экшена сохраняем данные
 	 */
 	@Override
-	protected void onStop() {
+	protected void onPause() {
 		gv.setExpTime(new Date().getTime());
 		gv.setLevel(level);
 		gv.setExp(exp);
 		gv.save();
 		
-		super.onStop();
+		Log.d("init", "onPause");
+		
+		super.onPause();
 	}
 }

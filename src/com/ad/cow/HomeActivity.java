@@ -221,13 +221,13 @@ public class HomeActivity extends AbstractActivity {
 	 * При завершении экшена сохраняем данные
 	 */
 	@Override
-	protected void onStop() {		
+	protected void onPause() {		
 		gv.setPercent(percent);
 		gv.setTime(new Date().getTime());
 		gv.setExp(exp);
 		gv.save();
 		
-		super.onStop();
+		super.onPause();
 	}
 
 }
