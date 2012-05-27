@@ -51,7 +51,7 @@ public class HomeActivity extends AbstractActivity {
 	private void loadPreferences() {
 		long currentTime = new Date().getTime();
 
-		textView = (TextView) findViewById(R.id.textView1);
+		textView = (TextView) findViewById(R.id.cowfeed);
 
 		// Достаем сохраненные данные
 		gv = GlobalVar.getInstance();

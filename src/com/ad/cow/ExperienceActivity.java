@@ -9,10 +9,10 @@ import android.widget.TextView;
 public class ExperienceActivity extends AbstractActivity {
 	/**
 	 * Необходимые переменные
-	 */	
+	 */
 	private GlobalVar gv;
 	private final float expPerSecond = 0.002777778f;
-	
+
 	private float exp;
 	private long time;
 	private int level;
@@ -25,13 +25,13 @@ public class ExperienceActivity extends AbstractActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.experience);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		loadPreferences();
 	}
-	
+
 	private void loadPreferences() {
 		long currentTime = new Date().getTime();
 
@@ -41,66 +41,70 @@ public class ExperienceActivity extends AbstractActivity {
 		level = gv.getLevel();
 		exp = gv.getExp();
 
-		long diff = currentTime - time; 
+		long diff = currentTime - time;
 		float seconds = diff / 1000;
 		float addExp = seconds * expPerSecond;
-		exp = exp + addExp; 
+		exp = exp + addExp;
 		gv.setExpTime(new Date().getTime());
+		
+		handleLevelUp();
 
 		TextView textView = (TextView) findViewById(R.id.textView1);
 		textView.setText("У вас " + exp + " опыта");
-		
+
 		TextView textView2 = (TextView) findViewById(R.id.textView2);
-		textView2.setText("Вам добавилось " + addExp+ " опыта");
+		textView2.setText("Вам добавилось " + addExp + " опыта");
+
+		TextView levelView = (TextView) findViewById(R.id.level);
+		levelView.setText(level+"");
 		
-		handleLevelUp();
-		
-		double percentByExp = nettoXpNeededForLevel(level+1) / 100;
+		double percentByExp = nettoXpNeededForLevel(level + 1) / 100;
 		double currentPercent = xpSinceLastLevelUp() / percentByExp;
-		
+
 		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
-		progressView.setProgress((int)currentPercent);
+		progressView.setProgress((int) currentPercent);
 	}
 
-	
-    /**
-	* Check if the player has reached enough XP for a levelup
-	*/
-    private void handleLevelUp() {
-        if (xpSinceLastLevelUp() >= nettoXpNeededForLevel(level+1)) {
-            level++; 
-        }
-    }
+	/**
+	 * Check if the player has reached enough XP for a levelup
+	 */
+	private void handleLevelUp() {
+		while(xpSinceLastLevelUp() >= nettoXpNeededForLevel(level + 1)) {
+			level++;
+		}
+	}
 
-    /**
-	*
-	* @param level to calculate summed up xp value for
-	*
-	* @return summed up xp value
-	*/
-    public double summedUpXpNeededForLevel(int level){
-    	return 1.75 * Math.pow(level, 2) + 5.00 * level;
-    }
-    
-    /**
-	*
-	* @param level to calculate netto xp value for
-	*
-	* @return netto xp value
-	*/
-    public double nettoXpNeededForLevel(int level){
-        if (level == 0) return 0;
-        return summedUpXpNeededForLevel(level) - summedUpXpNeededForLevel(level-1);
-    }
-    
-    /**
-	*
-	* @return xp gained since last level up
-	*/
-    public double xpSinceLastLevelUp(){
-        return exp - summedUpXpNeededForLevel(level);
-    }  
-    
+	/**
+	 * 
+	 * @param level
+	 *            to calculate summed up xp value for
+	 * 
+	 * @return summed up xp value
+	 */
+	public double summedUpXpNeededForLevel(int level) {
+		return 1.75 * Math.pow(level, 2) + 5.00 * level;
+	}
+
+	/**
+	 * 
+	 * @param level
+	 *            to calculate netto xp value for
+	 * 
+	 * @return netto xp value
+	 */
+	public double nettoXpNeededForLevel(int level) {
+		if (level == 0) return 0;
+		return summedUpXpNeededForLevel(level) - summedUpXpNeededForLevel(level - 1);
+	}
+
+	/**
+	 * 
+	 * @return xp gained since last level up
+	 */
+	public double xpSinceLastLevelUp() {
+		return exp - summedUpXpNeededForLevel(level);
+	}
+
 	/**
 	 * При завершении экшена сохраняем данные
 	 */
@@ -109,7 +113,7 @@ public class ExperienceActivity extends AbstractActivity {
 		gv.setLevel(level);
 		gv.setExp(exp);
 		gv.save();
-		
+
 		super.onPause();
 	}
 }
