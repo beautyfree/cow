@@ -114,6 +114,10 @@ public class HomeActivity extends AbstractActivity {
 				Feed();
 			}
 		});
+		
+		// Если коровка была мертва то она голодна - кормим
+		if(percent <= 0) 
+			percent = 5;
 	}
 	
 	/**

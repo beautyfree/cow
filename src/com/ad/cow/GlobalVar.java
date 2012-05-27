@@ -78,7 +78,7 @@ public class GlobalVar extends Application {
 	private void LoadPreferences(Context context) {
 		loader = PreferenceManager.getDefaultSharedPreferences(context);
 		this._level = loader.getInt("level", 0);
-		this._percent = loader.getFloat("percent", 10.0f);
+		this._percent = loader.getFloat("percent", 0.0f);
 		this._time = loader.getLong("time", new Date().getTime());
 		this._expTime = loader.getLong("exp_time", new Date().getTime());
 		this._exp = loader.getFloat("exp", 0.0f);		
