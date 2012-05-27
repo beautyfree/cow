@@ -2,13 +2,9 @@ package com.ad.cow;
 
 import java.util.Date;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ExperienceActivity extends AbstractActivity {
 	/**
@@ -20,49 +16,20 @@ public class ExperienceActivity extends AbstractActivity {
 	private float exp;
 	private long time;
 	private int level;
-	private float newExp;
-    
+
 	/**
 	 * Старт активности
 	 */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.experience);
-		
-		Log.d("init", "onCreate");
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		Log.d("init", "onStart");
 	}
 	
 	@Override
-	public void onResume() {
+	protected void onResume() {
 		super.onResume();
-		Log.d("init", "onResume");
-		
 		loadPreferences();
-	}
-	
-	@Override
-	public void onStop() {
-		super.onStop();
-		Log.d("init", "onStop");
-	}
-	
-	@Override
-	public void onRestart() {
-		super.onRestart();
-		Log.d("init", "onRestart");
-	}
-	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		Log.d("init", "onDestroy");
 	}
 	
 	private void loadPreferences() {
@@ -78,13 +45,13 @@ public class ExperienceActivity extends AbstractActivity {
 		float seconds = diff / 1000;
 		float addExp = seconds * expPerSecond;
 		exp = exp + addExp; 
+		gv.setExpTime(new Date().getTime());
 
 		TextView textView = (TextView) findViewById(R.id.textView1);
 		textView.setText("У вас " + exp + " опыта");
 		
 		TextView textView2 = (TextView) findViewById(R.id.textView2);
 		textView2.setText("Вам добавилось " + addExp+ " опыта");
-		
 		
 		handleLevelUp();
 		
@@ -93,11 +60,6 @@ public class ExperienceActivity extends AbstractActivity {
 		
 		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
 		progressView.setProgress((int)currentPercent);
-		
-		/*gv.setExpTime(new Date().getTime());
-		gv.setLevel(level);
-		gv.setExp(exp);
-		gv.save();*/
 	}
 
 	
@@ -144,12 +106,9 @@ public class ExperienceActivity extends AbstractActivity {
 	 */
 	@Override
 	protected void onPause() {
-		gv.setExpTime(new Date().getTime());
 		gv.setLevel(level);
 		gv.setExp(exp);
 		gv.save();
-		
-		Log.d("init", "onPause");
 		
 		super.onPause();
 	}

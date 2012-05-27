@@ -19,7 +19,7 @@ public class AbstractActivity extends SherlockActivity {
 	private AdView adView;
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -49,14 +49,6 @@ public class AbstractActivity extends SherlockActivity {
 		super.setContentView(layout);
 		adView.bringToFront();
     }  
-
-	@Override
-	public void onDestroy() {
-		if (adView != null) {
-			adView.destroy();
-		}
-		super.onDestroy();
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,5 +101,12 @@ public class AbstractActivity extends SherlockActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
+	
+	@Override
+	protected void onDestroy() {
+		if (adView != null) {
+			adView.destroy();
+		}
+		super.onDestroy();
+	}
 }
