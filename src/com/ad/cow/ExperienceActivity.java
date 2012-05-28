@@ -48,19 +48,13 @@ public class ExperienceActivity extends AbstractActivity {
 		gv.setExpTime(new Date().getTime());
 		
 		handleLevelUp();
-
-		TextView textView = (TextView) findViewById(R.id.textView1);
-		textView.setText("У вас " + exp + " опыта");
-
-		TextView textView2 = (TextView) findViewById(R.id.textView2);
-		textView2.setText("Вам добавилось " + addExp + " опыта");
-
-		TextView levelView = (TextView) findViewById(R.id.level);
-		levelView.setText(level+"");
+		
+		TextView experienceView = (TextView) findViewById(R.id.experience);
+		experienceView.setText((int)xpSinceLastLevelUp() + "/" + (int)nettoXpNeededForLevel(level + 1));
 		
 		double percentByExp = nettoXpNeededForLevel(level + 1) / 100;
 		double currentPercent = xpSinceLastLevelUp() / percentByExp;
-
+		
 		ProgressBar progressView = (ProgressBar) findViewById(R.id.progressBar1);
 		progressView.setProgress((int) currentPercent);
 	}
