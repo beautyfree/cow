@@ -33,7 +33,7 @@
 	        style="?android:attr/progressBarStyleHorizontal"
 	        android:progressDrawable="@drawable/my_custom_pb"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" />
+	        android:layout_height="20dip" />
 	
 	    <CheckedTextView
 	        android:id="@+id/checkedTextView3"
