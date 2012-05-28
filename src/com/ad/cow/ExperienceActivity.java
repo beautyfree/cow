@@ -48,6 +48,9 @@ public class ExperienceActivity extends AbstractActivity {
 		gv.setExpTime(new Date().getTime());
 		
 		handleLevelUp();
+
+		TextView levelView = (TextView) findViewById(R.id.level);
+		levelView.setText(level+"");
 		
 		TextView experienceView = (TextView) findViewById(R.id.experience);
 		experienceView.setText((int)xpSinceLastLevelUp() + "/" + (int)nettoXpNeededForLevel(level + 1));
