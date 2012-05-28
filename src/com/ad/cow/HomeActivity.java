@@ -3,6 +3,7 @@ package com.ad.cow;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -146,11 +147,11 @@ public class HomeActivity extends AbstractActivity {
 	 */
 	public void Feed() {
 		/*
-		 * Показываем ачивку Intent intent = new Intent(this,
-		 * AchieveActivity.class);
-		 * intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		 * startActivity(intent);
-		 */
+		 * Показываем ачивку 
+		 */ 
+		Intent intent = new Intent(this, AchieveActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
 
 		// Вычисляем новое значение процента голода и добавляем опыт
 		int newPercent = mProgress.getProgress() + 10;
