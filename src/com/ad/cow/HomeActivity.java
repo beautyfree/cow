@@ -155,7 +155,7 @@ public class HomeActivity extends AbstractActivity {
 		// Вычисляем новое значение процента голода и добавляем опыт
 		int newPercent = mProgress.getProgress() + 10;
 		if(newPercent < 100){
-			exp += 15;
+			exp += 5;
 		}	
 		
 		if (newPercent <= 100) {
