@@ -34,7 +34,7 @@
 	        style="?android:attr/progressBarStyleHorizontal"
 	        android:progressDrawable="@drawable/my_custom_pb"
 	        android:layout_width="match_parent"
-	        android:layout_height="20dip"
+	        android:layout_height="30dip"
 	        android:layout_marginBottom="10dip" />
 	
 	    <Button
