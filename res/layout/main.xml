@@ -26,6 +26,7 @@
 	        android:layout_gravity="center"
 	        android:text="@string/cowfeed1"
 	        android:textAppearance="?android:attr/textAppearanceMedium" 
+	        android:textSize="14dip"
 	        android:textColor="#000000"/>
 	
 	    <ProgressBar
@@ -33,13 +34,8 @@
 	        style="?android:attr/progressBarStyleHorizontal"
 	        android:progressDrawable="@drawable/my_custom_pb"
 	        android:layout_width="match_parent"
-	        android:layout_height="20dip" />
-	
-	    <CheckedTextView
-	        android:id="@+id/checkedTextView3"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="" />
+	        android:layout_height="20dip"
+	        android:layout_marginBottom="10dip" />
 	
 	    <Button
 	        android:id="@+id/button1"
