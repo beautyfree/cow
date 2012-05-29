@@ -62,7 +62,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name); // Name
         values.put(KEY_EMAIL, email); // Email
-        values.put(KEY_UID, uid); // Email
+        values.put(KEY_UID, uid); // UID
         values.put(KEY_CREATED_AT, created_at); // Created At
  
         // Inserting Row

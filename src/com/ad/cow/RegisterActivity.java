@@ -79,13 +79,11 @@ public class RegisterActivity extends Activity {
 									json_user.getString(KEY_EMAIL),
 									json.getString(KEY_UID),
 									json_user.getString(KEY_CREATED_AT));
-							// Launch Dashboard Screen
-							Intent dashboard = new Intent(
-									getApplicationContext(),
-									DashboardActivity.class);
-							// Close all views before launching Dashboard
-							dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							startActivity(dashboard);
+							// Launch Home Screen
+							Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+							// Close all views before launching Home
+							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
 							// Close Registration Screen
 							finish();
 						} else {
@@ -104,9 +102,8 @@ public class RegisterActivity extends Activity {
 		btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
-				Intent i = new Intent(getApplicationContext(),
-						LoginActivity.class);
-				startActivity(i);
+				Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+				startActivity(intent);
 				// Close Registration View
 				finish();
 			}

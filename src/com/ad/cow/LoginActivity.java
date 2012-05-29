@@ -40,6 +40,17 @@ public class LoginActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+		// Check login status in database
+		UserFunctions userFunctions = new UserFunctions();
+		if (userFunctions.isUserLoggedIn(getApplicationContext())) {
+			// Launch Home Screen
+			Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+			// Close all views before launching Home
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			// Close Login Screen
+			finish();
+		}
 		setContentView(R.layout.login);
 
 		// Importing all assets like buttons, text fields
@@ -78,13 +89,10 @@ public class LoginActivity extends Activity {
 									json_user.getString(KEY_CREATED_AT));
 
 							// Launch Dashboard Screen
-							Intent dashboard = new Intent(
-									getApplicationContext(),
-									DashboardActivity.class);
-
+							Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
 							// Close all views before launching Dashboard
-							dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							startActivity(dashboard);
+							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
 
 							// Close Login Screen
 							finish();

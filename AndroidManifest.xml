@@ -15,7 +15,8 @@
         android:name=".AbstractApplication" >
         
         <activity
-            android:name=".LoginActivity">
+            android:name=".LoginActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action   android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,10 +25,6 @@
         
         <activity
             android:name=".RegisterActivity">
-        </activity>
-        
-        <activity
-            android:name=".DashboardActivity">
         </activity>
         
         <activity

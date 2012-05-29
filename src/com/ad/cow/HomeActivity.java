@@ -3,8 +3,6 @@ package com.ad.cow;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.ad.cow.library.GlobalVar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ad.cow.library.GlobalVar;
+import com.ad.cow.library.UserFunctions;
 
 /**
  * Главная страница
@@ -44,7 +45,40 @@ public class HomeActivity extends AbstractActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		/**
+		 * Dashboard Screen for the application
+		 * */
+		// Check login status in database
+		UserFunctions userFunctions = new UserFunctions();
+		if (userFunctions.isUserLoggedIn(getApplicationContext())) {
+			// user already logged in show databoard
+			//setContentView(R.layout.dashboard);
+			
+			/*btnLogout = (Button) findViewById(R.id.btnLogout);
+			btnLogout.setOnClickListener(new View.OnClickListener() {
 
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					userFunctions.logoutUser(getApplicationContext());
+					Intent login = new Intent(getApplicationContext(),
+							LoginActivity.class);
+					login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(login);
+					// Closing dashboard screen
+					finish();
+				}
+			});*/
+
+		} else {
+			// user is not logged in show login screen
+			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			// Closing dashboard screen
+			finish();
+		}
+		
 		loadPreferences();
 	}
 	
