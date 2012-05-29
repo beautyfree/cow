@@ -3,4 +3,5 @@
     <item name="ID_ACTION_HOME" type="id"/>
     <item name="ID_ACTION_EXPERIENCE" type="id"/>
     <item name="ID_ACTION_STATUS" type="id"/>
+    <item name="ID_EXIT_ACCOUNT" type="id"/>
 </resources>

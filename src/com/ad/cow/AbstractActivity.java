@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.SubMenu;
+import com.ad.cow.library.UserFunctions;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
@@ -73,8 +75,11 @@ public class AbstractActivity extends SherlockActivity {
 						MenuItem.SHOW_AS_ACTION_ALWAYS
 								| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
+		menu.add(1, R.id.ID_EXIT_ACCOUNT, 1, R.string.exit);
+		
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
-
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		return true;
 	}
 
@@ -82,24 +87,33 @@ public class AbstractActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
 		switch (item.getItemId()) {
-		case R.id.ID_ACTION_HOME:
-			intent = new Intent(this, HomeActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			return true;
-		case R.id.ID_ACTION_EXPERIENCE:
-			intent = new Intent(this, ExperienceActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			return true;
-		case R.id.ID_ACTION_STATUS:
-			intent = new Intent(this, StatusActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+        	case android.R.id.home:
+        	case R.id.ID_ACTION_HOME:
+				intent = new Intent(this, HomeActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				break;
+			case R.id.ID_ACTION_EXPERIENCE:
+				intent = new Intent(this, ExperienceActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				break;
+			case R.id.ID_ACTION_STATUS:
+				intent = new Intent(this, StatusActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				break;
+			case R.id.ID_EXIT_ACCOUNT:
+				UserFunctions userFunctions = new UserFunctions();
+				if(userFunctions.logoutUser(this)) {
+					intent = new Intent(this, LoginActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+				}
+				finish();
+				break;				
 		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	@Override

@@ -42,9 +42,9 @@ public class LoginActivity extends Activity {
 
 		// Check login status in database
 		UserFunctions userFunctions = new UserFunctions();
-		if (userFunctions.isUserLoggedIn(getApplicationContext())) {
+		if (userFunctions.isUserLoggedIn(this)) {
 			// Launch Home Screen
-			Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+			Intent intent = new Intent(this, HomeActivity.class);
 			// Close all views before launching Home
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
@@ -77,8 +77,7 @@ public class LoginActivity extends Activity {
 						if (Integer.parseInt(res) == 1) {
 							// user successfully logged in
 							// Store user details in SQLite Database
-							DatabaseHandler db = new DatabaseHandler(
-									getApplicationContext());
+							DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 							JSONObject json_user = json.getJSONObject("user");
 
 							// Clear all previous data in database

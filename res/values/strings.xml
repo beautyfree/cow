@@ -16,4 +16,5 @@
 	<string name="nothing"></string>
 	<string name="resurrect">Resurrect</string>
 	<string name="experience">Experience</string>
+	<string name="exit">Exit from account</string>
 </resources>
