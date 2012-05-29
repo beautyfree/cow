@@ -2,13 +2,17 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#3b3b3b" >
+    android:padding="10dip"
+    android:background="@drawable/login_layout" >
  
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:orientation="vertical"
-        android:padding="10dip" >
+        android:padding="10dip"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/layout_border">
+        
         <!--  View Title Label -->
         <TextView
             android:layout_width="fill_parent"
@@ -17,40 +21,28 @@
             android:text="REGISTER"
             android:textSize="25dip"
             android:textStyle="bold" />
-        <!--  Name Label -->
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Full Name" />
+        
         <!--  Name TextField -->
         <EditText
             android:id="@+id/registerName"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
- 
-        <!--  Email Label -->
-        <TextView
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Email" />
+            android:hint="Full Name"/>
+ 
         <!--  Email TextField -->
         <EditText
             android:id="@+id/registerEmail"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
- 
-        <!--  Password Label -->
-        <TextView
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dip"
-            android:text="Password" />
+            android:hint="Email" />
+ 
         <!--  Password TextField -->
         <EditText
             android:id="@+id/registerPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:password="true" />
+            android:password="true"
+            android:hint="Password" />
  
         <!--  Error message -->
         <TextView android:id="@+id/register_error"
@@ -63,9 +55,10 @@
         <!--  Login Button -->
         <Button
             android:id="@+id/btnRegister"
+            android:background="@drawable/custom_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="10dip"
             android:text="Register" />
  
         <!--  Link to Login Screen -->

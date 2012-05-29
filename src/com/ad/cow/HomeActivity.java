@@ -45,6 +45,8 @@ public class HomeActivity extends AbstractActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+	
+		/**/
 		
 		/**
 		 * Dashboard Screen for the application

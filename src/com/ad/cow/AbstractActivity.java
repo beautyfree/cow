@@ -1,5 +1,8 @@
 package com.ad.cow;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +13,6 @@ import android.widget.LinearLayout;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
 import com.ad.cow.library.UserFunctions;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -29,7 +31,7 @@ public class AbstractActivity extends SherlockActivity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN
 				,WindowManager.LayoutParams.FLAG_FULLSCREEN
 		);
-		
+			
 		// Create the adView
 		adView = new AdView(this, AdSize.BANNER, "a14fbaa462a5c66");
 	}
