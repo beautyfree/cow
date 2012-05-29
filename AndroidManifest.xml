@@ -23,6 +23,14 @@
         </activity>
         
         <activity
+            android:name=".RegisterActivity">
+        </activity>
+        
+        <activity
+            android:name=".DashboardActivity">
+        </activity>
+        
+        <activity
             android:name=".HomeActivity"
             android:theme="@style/Theme.Sherlock"
             android:screenOrientation="portrait">
@@ -33,19 +41,18 @@
             android:theme="@style/Theme.Sherlock"
             android:screenOrientation="portrait">
         </activity>
-       
-        <activity
-            android:name=".AchieveActivity"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait">
-        </activity>
-        
+               
         <activity
             android:name=".ExperienceActivity"
             android:theme="@style/Theme.Sherlock"
             android:screenOrientation="portrait">
         </activity>
         
+        <activity
+            android:name=".AchieveActivity"
+            android:theme="@style/Theme.Transparent"
+            android:screenOrientation="portrait">
+        </activity>
         
 		<activity android:name="com.google.ads.AdActivity"
               android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>

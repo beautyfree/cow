@@ -1,4 +1,4 @@
-package com.ad.cow;
+package com.ad.cow.library;
 
 import java.util.Date;
 

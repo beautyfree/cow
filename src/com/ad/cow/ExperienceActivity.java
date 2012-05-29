@@ -2,6 +2,8 @@ package com.ad.cow;
 
 import java.util.Date;
 
+import com.ad.cow.library.GlobalVar;
+
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;

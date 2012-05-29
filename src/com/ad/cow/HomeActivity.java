@@ -3,6 +3,8 @@ package com.ad.cow;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.ad.cow.library.GlobalVar;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
