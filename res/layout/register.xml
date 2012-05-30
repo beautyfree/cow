@@ -18,7 +18,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip"
-            android:text="REGISTER"
+            android:text="@string/register"
             android:textSize="25dip"
             android:textStyle="bold" />
         
@@ -27,14 +27,14 @@
             android:id="@+id/registerName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Full Name"/>
+            android:hint="@string/full_name"/>
  
         <!--  Email TextField -->
         <EditText
             android:id="@+id/registerEmail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Email" />
+            android:hint="@string/email" />
  
         <!--  Password TextField -->
         <EditText
@@ -42,7 +42,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:password="true"
-            android:hint="Password" />
+            android:hint="@string/password" />
  
         <!--  Error message -->
         <TextView android:id="@+id/register_error"
@@ -59,7 +59,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
-            android:text="Register" />
+            android:text="@string/register_button" />
  
         <!--  Link to Login Screen -->
         <Button
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dip"
             android:background="@null"
-            android:text="Already registred. Login Me!"
+            android:text="@string/exist_account"
             android:textColor="#21dbd4"
             android:textStyle="bold" />
     </LinearLayout>

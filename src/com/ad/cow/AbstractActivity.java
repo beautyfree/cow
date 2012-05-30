@@ -1,5 +1,10 @@
 package com.ad.cow;
 
+import java.util.HashMap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -13,6 +18,7 @@ import android.widget.LinearLayout;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.ad.cow.library.DatabaseHandler;
 import com.ad.cow.library.UserFunctions;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -105,14 +111,31 @@ public class AbstractActivity extends SherlockActivity {
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				break;
-			case R.id.ID_EXIT_ACCOUNT:
+			case R.id.ID_EXIT_ACCOUNT:				
 				UserFunctions userFunctions = new UserFunctions();
-				if(userFunctions.logoutUser(this)) {
-					intent = new Intent(this, LoginActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
+		        JSONObject json = userFunctions.saveUserData(this);
+				
+				String KEY_SUCCESS = "success";
+		        // check for login response
+				try {
+					if (json.getString(KEY_SUCCESS) != null) {
+						String res = json.getString(KEY_SUCCESS);
+						if (Integer.parseInt(res) == 1) {
+							// user successfully logout
+							if(userFunctions.logoutUser(this)) {
+								intent = new Intent(this, LoginActivity.class);
+								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								startActivity(intent);
+							}
+							finish();
+						} else {
+							// Error in logout
+							//loginErrorMsg.setText("Incorrect username/password");
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
 				}
-				finish();
 				break;				
 		}
 		return super.onOptionsItemSelected(item);

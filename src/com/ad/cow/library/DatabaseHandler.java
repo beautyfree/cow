@@ -86,13 +86,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Inserting Row
         db.insert(TABLE_LOGIN, null, values);
         db.close(); // Closing database connection
+        
+        addData();
     }
     
     public void addData() {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();
-        HashMap<String, String> user = getUserDetails();
         values.put(KEY_DATA_LEVEL, 0); // Level
         values.put(KEY_DATA_PERCENT, 0.0); // Percent
         values.put(KEY_DATA_FEEDTIME, new Date().getTime()); // Feed time
@@ -106,8 +107,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     
     public void updateData(HashMap<String, String> data) {
         SQLiteDatabase db = this.getWritableDatabase();
-        
-        HashMap<String, String> user = getUserDetails();
 
         ContentValues values = new ContentValues();
         for(Entry<String, String> entry : data.entrySet()) {
@@ -153,11 +152,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Move to first row
         cursor.moveToFirst();
         if(cursor.getCount() > 0){
-            data.put(KEY_DATA_LEVEL, cursor.getString(2)); 
-            data.put(KEY_DATA_PERCENT, cursor.getString(3));
-            data.put(KEY_DATA_FEEDTIME, cursor.getString(4));
-            data.put(KEY_DATA_EXPTIME, cursor.getString(5)); 
-            data.put(KEY_DATA_EXP, cursor.getString(6)); 
+            data.put(KEY_DATA_LEVEL, cursor.getString(1)); 
+            data.put(KEY_DATA_PERCENT, cursor.getString(2));
+            data.put(KEY_DATA_FEEDTIME, cursor.getString(3));
+            data.put(KEY_DATA_EXPTIME, cursor.getString(4)); 
+            data.put(KEY_DATA_EXP, cursor.getString(5)); 
         }
         cursor.close();
         db.close();
@@ -187,8 +186,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * */
     public void resetTables(){
         SQLiteDatabase db = this.getWritableDatabase();
-        // Delete All Rows
         db.delete(TABLE_LOGIN, null, null);
+        db.delete(TABLE_DATA, null, null);
         db.close();
     }
  

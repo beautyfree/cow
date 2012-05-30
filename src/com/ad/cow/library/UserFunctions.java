@@ -1,33 +1,39 @@
 package com.ad.cow.library;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.ad.cow.HomeActivity;
+
 import android.content.Context;
+import android.content.Intent;
  
 public class UserFunctions {
  
     private JSONParser jsonParser;
  
-    // Testing in localhost using wamp or xampp
-    // use http://10.0.2.2/ to connect to your localhost ie http://localhost/
     private static String loginURL = "http://cow.devall.ru/api/";
     private static String registerURL = "http://cow.devall.ru/api/";
+    private static String saveURL = "http://cow.devall.ru/api/";
  
     private static String login_tag = "login";
     private static String register_tag = "register";
+    private static String save_tag = "save";
  
-    // constructor
+    // Коструктор
     public UserFunctions(){
         jsonParser = new JSONParser();
     }
  
     /**
-     * function make Login Request
+     * Функция выполняющая авторизацию пользователя
      * @param email
      * @param password
      * */
@@ -44,7 +50,7 @@ public class UserFunctions {
     }
  
     /**
-     * function make Register Request
+     * Функция выполняющая регистрация пользователя
      * @param name
      * @param email
      * @param password
@@ -62,9 +68,32 @@ public class UserFunctions {
         // return json
         return json;
     }
+    
+    /**
+     * Функция сохраняющая данные пользователя
+     * */
+    public JSONObject saveUserData(Context context){
+		DatabaseHandler db = new DatabaseHandler(context);
+		String uid = db.getUserDetails().get("uid");
+		HashMap<String, String> data = db.getUserData();
+    	
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        
+        params.add(new BasicNameValuePair("tag", save_tag));
+        params.add(new BasicNameValuePair("uid", uid));
+        for(Entry<String, String> entry : data.entrySet()) {
+            params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+        }
+        
+        // getting JSON Object
+        JSONObject json = jsonParser.getJSONFromUrl(saveURL, params);
+        // return json
+        return json;
+    }
  
     /**
-     * Function get Login status
+     * Функция получения статуса авторизации пользователя
      * */
     public boolean isUserLoggedIn(Context context){
         DatabaseHandler db = new DatabaseHandler(context);
@@ -77,8 +106,8 @@ public class UserFunctions {
     }
  
     /**
-     * Function to logout user
-     * Reset Database
+     * Функция выхода пользователя
+     * Очищает таблицы
      * */
     public boolean logoutUser(Context context){
         DatabaseHandler db = new DatabaseHandler(context);

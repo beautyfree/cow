@@ -69,6 +69,7 @@ public class GlobalVar extends Application {
 	public static GlobalVar getInstance(Context context) {
 		GlobalVar gv = GlobalVar.instance;
 		gv.LoadPreferences(context);
+		GlobalVar.instance = gv;
 		return gv;
 	}
 
@@ -89,12 +90,12 @@ public class GlobalVar extends Application {
 	}
 
 	public void save() {
-		/*HashMap<String, String> data = new HashMap<String, String>();
+		HashMap<String, String> data = new HashMap<String, String>();
 		data.put("level", Integer.toString(_level));
 		data.put("percent", Float.toString(_percent));
 		data.put("feed_time", Long.toString(_time));
 		data.put("exp_time", Long.toString(_expTime));
 		data.put("exp", Float.toString(_exp));
-		db.updateData(data);*/
+		db.updateData(data);
 	}
 }
