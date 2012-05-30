@@ -105,7 +105,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
     
-    public void updateData(HashMap<String, String> data) {
+    public void saveUserData(HashMap<String, String> data) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

@@ -2,9 +2,17 @@ package com.ad.cow.library;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map.Entry;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.ad.cow.LoginActivity;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
 public class GlobalVar extends Application {
 	private int _level = 0;
@@ -69,12 +77,39 @@ public class GlobalVar extends Application {
 	public static GlobalVar getInstance(Context context) {
 		GlobalVar gv = GlobalVar.instance;
 		gv.LoadPreferences(context);
-		GlobalVar.instance = gv;
 		return gv;
 	}
 
 	private void LoadPreferences(Context context) {
 		db = new DatabaseHandler(context);
+		UserFunctions userFunction = new UserFunctions();
+		
+		JSONObject json = userFunction.getUserData(context);
+		try {
+			String KEY_SUCCESS = "success";
+			if (json.getString(KEY_SUCCESS) != null) {
+				String res = json.getString(KEY_SUCCESS);
+				if (Integer.parseInt(res) == 1) {
+					// user successfully logout
+					JSONObject json_data = json.getJSONObject("data");
+					
+					HashMap<String, String> data = new HashMap<String, String>();
+					data.put("level", json_data.getString("level"));
+					data.put("percent", json_data.getString("percent"));
+					data.put("feed_time", json_data.getString("feed_time"));
+					data.put("exp_time", json_data.getString("exp_time"));
+					data.put("exp", json_data.getString("exp"));
+					db.saveUserData(data);	
+					
+				} else {
+					// Error in logout
+					//loginErrorMsg.setText("Incorrect username/password");
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
 		HashMap<String, String> data = db.getUserData();
 		if(!data.isEmpty()) {
 			this._level = Integer.parseInt(data.get("level"));
@@ -96,6 +131,6 @@ public class GlobalVar extends Application {
 		data.put("feed_time", Long.toString(_time));
 		data.put("exp_time", Long.toString(_expTime));
 		data.put("exp", Float.toString(_exp));
-		db.updateData(data);
+		db.saveUserData(data);
 	}
 }

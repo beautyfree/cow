@@ -69,8 +69,7 @@ public class RegisterActivity extends Activity {
 						if (Integer.parseInt(res) == 1) {
 							// user successfully registred
 							// Store user details in SQLite Database
-							DatabaseHandler db = new DatabaseHandler(
-									getApplicationContext());
+							DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 							JSONObject json_user = json.getJSONObject("user");
 
 							// Clear all previous data in database

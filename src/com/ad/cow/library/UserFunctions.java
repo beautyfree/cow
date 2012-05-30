@@ -22,10 +22,12 @@ public class UserFunctions {
     private static String loginURL = "http://cow.devall.ru/api/";
     private static String registerURL = "http://cow.devall.ru/api/";
     private static String saveURL = "http://cow.devall.ru/api/";
+    private static String getURL = "http://cow.devall.ru/api/";
  
     private static String login_tag = "login";
     private static String register_tag = "register";
     private static String save_tag = "save";
+    private static String get_tag = "get";
  
     // Коструктор
     public UserFunctions(){
@@ -89,6 +91,26 @@ public class UserFunctions {
         // getting JSON Object
         JSONObject json = jsonParser.getJSONFromUrl(saveURL, params);
         // return json
+        return json;
+    }
+    
+    /**
+     * Функция выполняющая авторизацию пользователя
+     * @param email
+     * @param password
+     * */
+    public JSONObject getUserData(Context context){
+		DatabaseHandler db = new DatabaseHandler(context);
+		String uid = db.getUserDetails().get("uid");
+    	
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", get_tag));
+        params.add(new BasicNameValuePair("uid", uid));
+        
+        JSONObject json = jsonParser.getJSONFromUrl(getURL, params);
+        // return json
+        // Log.e("JSON", json.toString());
         return json;
     }
  

@@ -1,11 +1,14 @@
 package com.ad.cow;
 
+import java.util.HashMap;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ad.cow.library.DatabaseHandler;
+import com.ad.cow.library.GlobalVar;
 import com.ad.cow.library.UserFunctions;
 
 public class LoginActivity extends Activity {
@@ -27,10 +31,18 @@ public class LoginActivity extends Activity {
 	private static String KEY_SUCCESS = "success";
 	private static String KEY_ERROR = "error";
 	private static String KEY_ERROR_MSG = "error_msg";
-	private static String KEY_UID = "uid";
-	private static String KEY_NAME = "name";
-	private static String KEY_EMAIL = "email";
-	private static String KEY_CREATED_AT = "created_at";
+	
+	private static String KEY_LOGIN_UID = "uid";
+	private static String KEY_LOGIN_NAME = "name";
+	private static String KEY_LOGIN_EMAIL = "email";
+	private static String KEY_LOGIN_CREATED_AT = "created_at";
+	
+    private static final String KEY_DATA_ID = "id";
+    private static final String KEY_DATA_LEVEL = "level";
+    private static final String KEY_DATA_PERCENT = "percent";
+    private static final String KEY_DATA_FEEDTIME = "feed_time";
+    private static final String KEY_DATA_EXPTIME = "exp_time";
+    private static final String KEY_DATA_EXP = "exp";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,11 +95,45 @@ public class LoginActivity extends Activity {
 							// Clear all previous data in database
 							userFunction.logoutUser(getApplicationContext());
 							db.addUser(
-									json_user.getString(KEY_NAME),
-									json_user.getString(KEY_EMAIL),
-									json.getString(KEY_UID),
-									json_user.getString(KEY_CREATED_AT)
+									json_user.getString(KEY_LOGIN_NAME),
+									json_user.getString(KEY_LOGIN_EMAIL),
+									json.getString(KEY_LOGIN_UID),
+									json_user.getString(KEY_LOGIN_CREATED_AT)
 							);
+							
+							json = userFunction.getUserData(getApplicationContext());
+							try {
+								String KEY_SUCCESS = "success";
+								if (json.getString(KEY_SUCCESS) != null) {
+									res = json.getString(KEY_SUCCESS);
+									if (Integer.parseInt(res) == 1) {
+										// user successfully logout
+										JSONObject json_data = json.getJSONObject("data");
+										
+										HashMap<String, String> data = new HashMap<String, String>();
+										data.put("level", json_data.getString("level"));
+										data.put("percent", json_data.getString("percent"));
+										data.put("feed_time", json_data.getString("feed_time"));
+										data.put("exp_time", json_data.getString("exp_time"));
+										data.put("exp", json_data.getString("exp"));
+										db.saveUserData(data);	
+										
+										GlobalVar gv = GlobalVar.getInstance();
+										gv.setLevel(json_data.getInt("level"));
+										gv.setPercent((float)json_data.getDouble("percent"));
+										gv.setTime(json_data.getLong("feed_time"));
+										gv.setExpTime(json_data.getLong("exp_time"));
+										gv.setExp((float)json_data.getDouble("exp"));
+										
+										Log.d("save",json_data.getString("level"));
+									} else {
+										// Error in logout
+										//loginErrorMsg.setText("Incorrect username/password");
+									}
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
 							
 							// Launch Dashboard Screen
 							Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
