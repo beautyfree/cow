@@ -19,6 +19,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.ad.cow.library.DatabaseHandler;
+import com.ad.cow.library.GlobalVar;
 import com.ad.cow.library.UserFunctions;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -146,6 +147,10 @@ public class AbstractActivity extends SherlockActivity {
 		if (adView != null) {
 			adView.destroy();
 		}
+		
+    	// Сохраняем данные на сервере
+    	new UserFunctions().saveUserData(getApplicationContext());
+		
 		super.onDestroy();
 	}
 }
