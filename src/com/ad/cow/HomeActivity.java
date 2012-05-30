@@ -95,7 +95,6 @@ public class HomeActivity extends AbstractActivity {
 
 		// Достаем сохраненные данные
 		gv = GlobalVar.getInstance();
-		Log.d("getPERCENT",Long.toString(gv.getTime()));
 		percent = gv.getPercent();
 		time = gv.getTime();
 		exp = gv.getExp();

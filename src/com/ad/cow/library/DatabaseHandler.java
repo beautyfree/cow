@@ -141,7 +141,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
     
     /**
-     * Getting user data from database
+     * Достаем пользовательские данные из базы данных
      * */
     public HashMap<String, String> getUserData(){
         HashMap<String,String> data = new HashMap<String,String>();
