@@ -2,16 +2,12 @@ package com.ad.cow.library;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.ad.cow.LoginActivity;
-
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 public class GlobalVar extends Application {
@@ -64,7 +60,7 @@ public class GlobalVar extends Application {
 	/**
 	 **********************************************
 	 */
-	private DatabaseHandler db;
+	private static DatabaseHandler db;
 	private static GlobalVar instance;
 
 	static {
@@ -93,13 +89,12 @@ public class GlobalVar extends Application {
 					// user successfully logout
 					JSONObject json_data = json.getJSONObject("data");
 					
-					HashMap<String, String> data = new HashMap<String, String>();
-					data.put("level", json_data.getString("level"));
-					data.put("percent", json_data.getString("percent"));
-					data.put("feed_time", json_data.getString("feed_time"));
-					data.put("exp_time", json_data.getString("exp_time"));
-					data.put("exp", json_data.getString("exp"));
-					db.saveUserData(data);	
+					setLevel(json_data.getInt("level"));
+					setPercent((float)json_data.getDouble("percent"));
+					setTime(json_data.getLong("feed_time"));
+					setExpTime(json_data.getLong("exp_time"));
+					setExp((float)json_data.getDouble("exp"));
+					save();	
 					
 				} else {
 					// Error in logout
@@ -112,14 +107,14 @@ public class GlobalVar extends Application {
 		
 		HashMap<String, String> data = db.getUserData();
 		if(!data.isEmpty()) {
-			this._level = Integer.parseInt(data.get("level"));
-			this._percent = Float.parseFloat(data.get("percent"));
-			this._time = Long.parseLong(data.get("feed_time"));
-			this._expTime = Long.parseLong(data.get("exp_time"));
-			this._exp = Float.parseFloat(data.get("exp"));
+			setLevel(Integer.parseInt(data.get("level")));
+			setPercent(Float.parseFloat(data.get("percent")));
+			setTime(Long.parseLong(data.get("feed_time")));
+			setExpTime(Long.parseLong(data.get("exp_time")));
+			setExp(Float.parseFloat(data.get("exp")));
 		}
 	}
-
+	
 	public static GlobalVar getInstance() {
 		return GlobalVar.instance;
 	}

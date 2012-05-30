@@ -6,6 +6,7 @@ import java.util.Date;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -94,6 +95,7 @@ public class HomeActivity extends AbstractActivity {
 
 		// Достаем сохраненные данные
 		gv = GlobalVar.getInstance();
+		Log.d("getPERCENT",Long.toString(gv.getTime()));
 		percent = gv.getPercent();
 		time = gv.getTime();
 		exp = gv.getExp();

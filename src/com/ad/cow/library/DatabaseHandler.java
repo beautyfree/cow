@@ -90,7 +90,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         addData();
     }
     
-    public void addData() {
+    private void addData() {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();

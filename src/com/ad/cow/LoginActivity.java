@@ -27,6 +27,8 @@ public class LoginActivity extends Activity {
 	EditText inputPassword;
 	TextView loginErrorMsg;
 
+	private GlobalVar gv;
+	
 	// JSON Response node names
 	private static String KEY_SUCCESS = "success";
 	private static String KEY_ERROR = "error";
@@ -110,22 +112,15 @@ public class LoginActivity extends Activity {
 										// user successfully logout
 										JSONObject json_data = json.getJSONObject("data");
 										
-										HashMap<String, String> data = new HashMap<String, String>();
-										data.put("level", json_data.getString("level"));
-										data.put("percent", json_data.getString("percent"));
-										data.put("feed_time", json_data.getString("feed_time"));
-										data.put("exp_time", json_data.getString("exp_time"));
-										data.put("exp", json_data.getString("exp"));
-										db.saveUserData(data);	
-										
-										GlobalVar gv = GlobalVar.getInstance();
+										gv = GlobalVar.getInstance();
 										gv.setLevel(json_data.getInt("level"));
 										gv.setPercent((float)json_data.getDouble("percent"));
 										gv.setTime(json_data.getLong("feed_time"));
 										gv.setExpTime(json_data.getLong("exp_time"));
 										gv.setExp((float)json_data.getDouble("exp"));
+										gv.save();
 										
-										Log.d("save",json_data.getString("level"));
+										Log.d("save",json_data.getString("percent"));
 									} else {
 										// Error in logout
 										//loginErrorMsg.setText("Incorrect username/password");
