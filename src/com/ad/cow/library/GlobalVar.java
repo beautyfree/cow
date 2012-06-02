@@ -82,39 +82,49 @@ public class GlobalVar extends Application {
 
 	private void LoadPreferences(Context context) {
 		db = new DatabaseHandler(context);
-		UserFunctions userFunction = new UserFunctions();
 		
-		JSONObject json = userFunction.getUserData(context);
-		try {
-			String KEY_SUCCESS = "success";
-			if (json.getString(KEY_SUCCESS) != null) {
-				String res = json.getString(KEY_SUCCESS);
-				if (Integer.parseInt(res) == 1) {
-					// user successfully logout
-					JSONObject json_data = json.getJSONObject("data");
-					
-					this._level = json_data.getInt("level");
-					this._percent = (float)json_data.getDouble("percent");
-					this._time = json_data.getLong("feed_time");
-					this._expTime = json_data.getLong("exp_time");
-					this._exp = (float)json_data.getDouble("exp");
-					save();	
-				} else {
-					// Error in logout
-					//loginErrorMsg.setText("Incorrect username/password");
+		UserFunctions userFunctions = new UserFunctions();
+		if (userFunctions.isUserLoggedIn(context)) {
+			HashMap<String, String> data = db.getUserData();
+			if(!data.isEmpty()) {
+				this._level = Integer.parseInt(data.get("level"));
+				this._percent = Float.parseFloat(data.get("percent"));
+				this._time = Long.parseLong(data.get("feed_time"));
+				this._expTime = Long.parseLong(data.get("exp_time"));
+				this._exp = Float.parseFloat(data.get("exp"));
+			}	
+		} else {
+			JSONObject json = userFunctions.getUserData(context);
+			try {
+				String KEY_SUCCESS = "success";
+				if (json.getString(KEY_SUCCESS) != null) {
+					String res = json.getString(KEY_SUCCESS);
+					if (Integer.parseInt(res) == 1) {
+						// user successfully logout
+						JSONObject json_data = json.getJSONObject("data");
+						
+						this._level = json_data.getInt("level");
+						this._percent = (float)json_data.getDouble("percent");
+						this._time = json_data.getLong("feed_time");
+						this._expTime = json_data.getLong("exp_time");
+						this._exp = (float)json_data.getDouble("exp");
+						save();	
+					} else {
+						HashMap<String, String> data = db.getUserData();
+						if(!data.isEmpty()) {
+							this._level = Integer.parseInt(data.get("level"));
+							this._percent = Float.parseFloat(data.get("percent"));
+							this._time = Long.parseLong(data.get("feed_time"));
+							this._expTime = Long.parseLong(data.get("exp_time"));
+							this._exp = Float.parseFloat(data.get("exp"));
+						}
+						// Error in logout
+						//loginErrorMsg.setText("Incorrect username/password");
+					}
 				}
-			} else {
-				HashMap<String, String> data = db.getUserData();
-				if(!data.isEmpty()) {
-					this._level = Integer.parseInt(data.get("level"));
-					this._percent = Float.parseFloat(data.get("percent"));
-					this._time = Long.parseLong(data.get("feed_time"));
-					this._expTime = Long.parseLong(data.get("exp_time"));
-					this._exp = Float.parseFloat(data.get("exp"));
-				}		
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 	}
 
