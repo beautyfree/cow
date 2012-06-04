@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.ad.cow.HomeActivity;
 import com.ad.cow.LoginActivity;
 
 import android.app.Application;
@@ -88,7 +89,8 @@ public class GlobalVar extends Application {
 			JSONObject json = userFunctions.getUserData(context);
 			try {
 				String KEY_SUCCESS = "success";
-				if (json.getString(KEY_SUCCESS) != null) {
+				String KEY_ERROR = "error";
+				if (json.has(KEY_SUCCESS)) {
 					String res = json.getString(KEY_SUCCESS);
 					if (Integer.parseInt(res) == 1) {
 						// user successfully logout
@@ -100,18 +102,25 @@ public class GlobalVar extends Application {
 						this._expTime = json_data.getLong("exp_time");
 						this._exp = (float)json_data.getDouble("exp");
 						save();	
-					} else {
-						HashMap<String, String> data = db.getUserData();
-						if(!data.isEmpty()) {
-							this._level = Integer.parseInt(data.get("level"));
-							this._percent = Float.parseFloat(data.get("percent"));
-							this._time = Long.parseLong(data.get("feed_time"));
-							this._expTime = Long.parseLong(data.get("exp_time"));
-							this._exp = Float.parseFloat(data.get("exp"));
-						}	
-						// Error in logout
-						//loginErrorMsg.setText("Incorrect username/password");
 					}
+				} else if (json.has(KEY_ERROR)) {
+					String res = json.getString(KEY_ERROR);
+					if (Integer.parseInt(res) == 1) {
+						userFunctions.logoutUser(context);
+						Intent intent = new Intent(this, LoginActivity.class);
+						// Close all views before launching Home
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);						
+					}
+				} else {
+					HashMap<String, String> data = db.getUserData();
+					if(!data.isEmpty()) {
+						this._level = Integer.parseInt(data.get("level"));
+						this._percent = Float.parseFloat(data.get("percent"));
+						this._time = Long.parseLong(data.get("feed_time"));
+						this._expTime = Long.parseLong(data.get("exp_time"));
+						this._exp = Float.parseFloat(data.get("exp"));
+					}	
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

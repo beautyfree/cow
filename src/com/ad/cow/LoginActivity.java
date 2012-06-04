@@ -83,7 +83,7 @@ public class LoginActivity extends Activity {
 
 				// check for login response
 				try {
-					if (json.getString(KEY_SUCCESS) != null) {
+					if (json.has(KEY_SUCCESS)) {
 						loginErrorMsg.setText("");
 						String res = json.getString(KEY_SUCCESS);
 						if (Integer.parseInt(res) == 1) {
@@ -133,7 +133,10 @@ public class LoginActivity extends Activity {
 							startActivity(intent);
 							// Close Login Screen
 							finish();
-						} else {
+						}
+					} else if (json.has(KEY_ERROR)) {
+						String res = json.getString(KEY_ERROR);
+						if (Integer.parseInt(res) == 1) {
 							// Error in login
 							loginErrorMsg.setText("Incorrect username/password");
 						}

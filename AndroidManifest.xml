@@ -46,6 +46,12 @@
         </activity>
         
         <activity
+            android:name=".RatingActivity"
+            android:theme="@style/Theme.Sherlock"
+            android:screenOrientation="portrait">
+        </activity>
+        
+        <activity
             android:name=".AchieveActivity"
             android:theme="@style/Theme.Transparent"
             android:screenOrientation="portrait">

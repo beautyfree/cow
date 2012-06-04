@@ -77,7 +77,7 @@ public class AbstractActivity extends SherlockActivity {
 						MenuItem.SHOW_AS_ACTION_ALWAYS
 								| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
-		menu.add(Menu.NONE, R.id.ID_ACTION_STATUS, Menu.NONE,
+		menu.add(Menu.NONE, R.id.ID_ACTION_RATING, Menu.NONE,
 				R.string.action_label_status)
 				.setIcon(R.drawable.ic_search)
 				.setShowAsAction(
@@ -107,8 +107,8 @@ public class AbstractActivity extends SherlockActivity {
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				break;
-			case R.id.ID_ACTION_STATUS:
-				intent = new Intent(this, StatusActivity.class);
+			case R.id.ID_ACTION_RATING:
+				intent = new Intent(this, RatingActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				break;
