@@ -23,12 +23,14 @@ public class UserFunctions {
     private static String registerURL = "http://cow.devall.ru/api/";
     private static String saveURL = "http://cow.devall.ru/api/";
     private static String getURL = "http://cow.devall.ru/api/";
+    private static String ratingURL = "http://cow.devall.ru/api/";
  
     private static String login_tag = "login";
     private static String register_tag = "register";
     private static String save_tag = "save";
     private static String get_tag = "get";
- 
+    private static String rating_tag = "rating";
+    
     // Коструктор
     public UserFunctions(){
         jsonParser = new JSONParser();
@@ -114,6 +116,22 @@ public class UserFunctions {
         return json;
     }
  
+    /**
+     * Функция возвращающая рейтинг
+     * @param email
+     * @param password
+     * */
+    public JSONObject getRating(Context context){
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", rating_tag));
+        
+        JSONObject json = jsonParser.getJSONFromUrl(ratingURL, params);
+        // return json
+        // Log.e("JSON", json.toString());
+        return json;
+    }
+    
     /**
      * Функция получения статуса авторизации пользователя
      * */
