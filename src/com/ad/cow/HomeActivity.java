@@ -186,9 +186,9 @@ public class HomeActivity extends AbstractActivity {
 		/*
 		 * Показываем ачивку 
 		 */ 
-		Intent intent = new Intent(this, AchieveActivity.class);
+		/*Intent intent = new Intent(this, AchieveActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
+		startActivity(intent);*/
 
 		// Вычисляем новое значение процента голода и добавляем опыт
 		int newPercent = mProgress.getProgress() + 10;
