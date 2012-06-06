@@ -61,7 +61,7 @@ public class RatingAdapter extends ArrayAdapter {
 		double nettoXP = activity.nettoXpNeededForLevel(level + 1);
 		
 		holder.txtLevel.setText(Integer.toString(s.getLevel()));
-		holder.txtExp.setText(Double.toString((int)currentXP)+"/"+Double.toString(nettoXP));
+		holder.txtExp.setText((int)currentXP+"/"+(int)nettoXP);
 
 		double percentByExp = activity.nettoXpNeededForLevel(level + 1) / 100;
 		double currentPercent = currentXP / percentByExp;
