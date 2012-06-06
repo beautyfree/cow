@@ -47,8 +47,6 @@ public class HomeActivity extends AbstractActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 	
-		/**/
-		
 		/**
 		 * Dashboard Screen for the application
 		 * */
